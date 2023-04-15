@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CategoryMenu = (props) => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
     props.onCategorySelect(category);
+  };
+
+  const getCardClassName = (category) => {
+    if (!selectedCategory) {
+      return 'category-card';
+    }
+    return category.id === selectedCategory.id ? 'category-card' : 'category-card hidden';
   };
 
   return (
     <div className="category-menu">
       {props.categories.map((category) => (
-        <div className="category-card" key={category.id} onClick={() => handleCategoryClick(category)}>
-          <img
-            className="category-image"
-            src={category.image}
-            alt={category.title}
-          />
+        <div
+          className={getCardClassName(category)}
+          key={category.id}
+          onClick={() => handleCategoryClick(category)}
+        >
+          <img className="category-image" src={category.image} alt={category.title} />
           <div className="category-info">
             <h2 className="category-title">{category.title}</h2>
             <p className="category-description">{category.description}</p>

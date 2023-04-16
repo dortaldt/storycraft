@@ -12,7 +12,7 @@ const CategoryMenu = (props) => {
     if (!selectedCategory) {
       return 'category-card';
     }
-    return category.id === selectedCategory.id ? 'category-card' : 'category-card hidden';
+    return category.id === selectedCategory.id ? 'category-card selected' : 'category-card hidden';
   };
 
   return (

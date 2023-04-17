@@ -75,13 +75,13 @@ function ParagraphBanner(props: {
           ))}
         {showImageLoader && (
           <div className="image-loader-container">
-            <p className="image-loader-description">{imageLoaderDescription}</p>
             <ImageLoader
               defaultImageUrl={defaultImageUrl}
               apiEndpoint={apiEndpoint}
               onResponse={() => setShowImageLoader(false)}
               active={showImageLoader}
             />
+            <p className="image-loader-description">{imageLoaderDescription}</p>
           </div>
         )}
       </div>

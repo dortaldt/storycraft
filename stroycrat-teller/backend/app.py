@@ -39,11 +39,11 @@ class ImageUpload(Resource):
             # Process the image if needed, e.g. resgit pullizing or adding a watermark.
             # You can use the Pillow library for image manipulation.
             time.sleep(3)
-            return {'imageUrl': f'localhost:7860/{UPLOAD_FOLDER}/{filename}'}, 200
+            return {'imageUrl': f'https://dortaldt-fictional-barnacle-xrr5xqr4xpph6gg7-3000.preview.app.github.dev/'}, 200
         else:
             return {'error': 'File type not allowed'}, 400
 
 api.add_resource(ImageUpload, '/submit_room')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=7860, host='0.0.0.0')
+    app.run(debug=True, port=3000, host='0.0.0.0')

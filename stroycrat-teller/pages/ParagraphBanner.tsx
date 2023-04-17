@@ -73,7 +73,7 @@ const imageLoaderValue = imageLoaderObject.value;
               style={{ opacity: index === currentIndex ? 1 : 0.5 }}
               dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value)}
             />
-            {index === currentIndex && currentText.length === content.value.length && (
+            {index === currentIndex && currentText.length === content.value.length && index !== imageLoaderTriggerParagraph - 1 && (
               <div className="banner-container">
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>     

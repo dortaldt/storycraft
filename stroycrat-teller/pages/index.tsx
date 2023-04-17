@@ -48,7 +48,7 @@ function App() {
       {/* Render ParagraphBanner component when a category is selected */}
       {selectedCategory && <ParagraphBanner
         paragraphs={selectedCategory.content}
-        imageLoaderTriggerParagraph={3}
+        imageLoaderTriggerParagraph={selectedCategory.triggerParagraph}
         defaultImageUrl={defaultImageUrl}
         apiEndpoint={apiEndpoint}
       />}

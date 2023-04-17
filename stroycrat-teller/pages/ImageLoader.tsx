@@ -6,6 +6,8 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [firstImageUploaded, setFirstImageUploaded] = useState(false);
+  const [showButtonsContainer, setShowButtonsContainer] = useState(true);
+
 
   const fileInputRef = useRef(null);
 
@@ -32,14 +34,16 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
 
   const handleSendToServer = async () => {
     if (!uploadedFile) return;
-
+  
     try {
       await uploadImage(uploadedFile);
       onResponse(); // Call the onResponse callback after the image has been uploaded
+      setShowButtonsContainer(false); // Hide the buttons container
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
+  
 
   const uploadImage = async (file) => {
     try {
@@ -72,29 +76,31 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
   return (
     <div>
       <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
-      <div className='buttons-container'>
-        <button type="button" onClick={handleButtonClick}>
-          Upload Image
-        </button>
-        <input
-          type="file"
-          accept="image/*"
-          capture="user"
-          ref={fileInputRef}
-          onChange={handleImageUpload}
-          style={{ display: 'none' }}
-        />
-        {firstImageUploaded && (
-          <button type="button" onClick={handleSendToServer}>
-            Send to Server
+      {showButtonsContainer && (
+        <div className='buttons-container'>
+          <button type="button" onClick={handleButtonClick}>
+            Upload Image
           </button>
-        )}
-        {uploadProgress > 0 && (
-          <div>
-            <progress value={uploadProgress} max="100" />
-          </div>
-        )}
-      </div>
+          <input
+            type="file"
+            accept="image/*"
+            capture="user"
+            ref={fileInputRef}
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+          />
+          {firstImageUploaded && (
+            <button type="button" onClick={handleSendToServer}>
+              Send to Server
+            </button>
+          )}
+          {uploadProgress > 0 && (
+            <div>
+              <progress value={uploadProgress} max="100" />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

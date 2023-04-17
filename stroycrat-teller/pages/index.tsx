@@ -57,7 +57,7 @@ function App() {
   return (
     <div className="App">
       <CategoryMenu categories={categories} onCategorySelect={handleCategorySelect} setCategories={setCategories} />
-      {selectedCategory && <ParagraphBanner paragraphs={selectedCategory.content} imageLoaderTriggerParagraph={1} />}
+      {selectedCategory && <ParagraphBanner paragraphs={selectedCategory.content} imageLoaderTriggerParagraph={3} />}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import ImageLoader from './ImageLoader';
 
 function App() {
   const defaultImageUrl = 'https://static.wixstatic.com/media/845144_90be4482dfb04734b9f11bb7bdbfeefe~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/download__88_-removebg-preview_edited_pn.png';
-  const apiEndpoint = 'https://dortaldt-fictional-barnacle-xrr5xqr4xpph6gg7-3000.preview.app.github.dev/';
+  const apiEndpoint = 'https://dortaldt-fictional-barnacle-xrr5xqr4xpph6gg7-7860.preview.app.github.dev/';
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState([
     {

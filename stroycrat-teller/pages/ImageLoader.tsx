@@ -1,19 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, active }) => {
+const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [firstImageUploaded, setFirstImageUploaded] = useState(false);
 
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    if (active) {
-      handleButtonClick();
-    }
-  }, [active]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];

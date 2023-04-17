@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ImageLoader from './ImageLoader';
+import { type } from 'os';
 
 function ParagraphBanner(props: {
     paragraphs: any;
@@ -53,6 +54,12 @@ function ParagraphBanner(props: {
     return { __html: text.replace(/\/n/g, '<br />') };
   };
 
+  // Find the first object with the 'type' value "imageLoader" in the 'paragraphs' prop
+const imageLoaderObject = paragraphs.find(content => content.type === 'imageLoader');
+
+// Access the 'value' key of the found object
+const imageLoaderValue = imageLoaderObject.value;
+
   return (
     <div className="paragraph-banner-container" onClick={handleScreenClick}>
       <div className="paragraph-container">
@@ -79,7 +86,7 @@ function ParagraphBanner(props: {
                   onResponse={() => setShowImageLoader(true)}
                   active={showImageLoader}
                 />
-                <p className="image-loader-description">{imageLoaderDescription}</p>
+                <p className="image-loader-description">{imageLoaderValue}</p>
               </div>
             )}
           </div>

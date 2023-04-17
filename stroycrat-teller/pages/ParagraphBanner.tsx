@@ -56,34 +56,34 @@ function ParagraphBanner(props: {
   return (
     <div className="paragraph-banner-container" onClick={handleScreenClick}>
       <div className="paragraph-container">
-        {paragraphs
-          .filter((content) => content.type === 'paragraph')
-          .slice(0, currentIndex + 1)
-          .map((content, index) => (
-            <div className="paragraph" key={index}>
-              <p
-                className="paragraph-text"
-                style={{ opacity: index === currentIndex ? 1 : 0.5 }}
-                dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value)}
-              />
-              {index === currentIndex && currentText.length === content.value.length && (
-                <div className="banner-container">
-                  <p className="banner-text">Click anywhere to continue</p>
-                </div>
-              )}
-            </div>
-          ))}
-        {showImageLoader && (
-          <div className="image-loader-container">
-            <ImageLoader
-              defaultImageUrl={defaultImageUrl}
-              apiEndpoint={apiEndpoint}
-              onResponse={() => setShowImageLoader(true)}
-              active={showImageLoader}
+      {paragraphs
+        .filter((content) => content.type === 'paragraph')
+        .slice(0, currentIndex + 1)
+        .map((content, index) => (
+          <div className="paragraph" key={index}>
+            <p
+              className="paragraph-text"
+              style={{ opacity: index === currentIndex ? 1 : 0.5 }}
+              dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value)}
             />
-            <p className="image-loader-description">{imageLoaderDescription}</p>
+            {index === currentIndex && currentText.length === content.value.length && (
+              <div className="banner-container">
+                <p className="banner-text">Click anywhere to continue</p>
+              </div>
+            )}
+            {index === imageLoaderTriggerParagraph - 1 && showImageLoader && (
+              <div className="image-loader-container">
+                <ImageLoader
+                  defaultImageUrl={defaultImageUrl}
+                  apiEndpoint={apiEndpoint}
+                  onResponse={() => setShowImageLoader(true)}
+                  active={showImageLoader}
+                />
+                <p className="image-loader-description">{imageLoaderDescription}</p>
+              </div>
+            )}
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

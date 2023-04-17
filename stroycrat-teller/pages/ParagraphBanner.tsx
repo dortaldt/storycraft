@@ -85,8 +85,8 @@ const imageLoaderValue = imageLoaderObject.value;
                   apiEndpoint={apiEndpoint}
                   onResponse={() => setShowImageLoader(true)}
                   active={showImageLoader}
+                  loaderDescription={imageLoaderValue}
                 />
-                <p className="image-loader-description">{imageLoaderValue}</p>
               </div>
             )}
           </div>

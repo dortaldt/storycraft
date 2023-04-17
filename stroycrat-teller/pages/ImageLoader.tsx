@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
+const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -99,6 +99,9 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
               <progress value={uploadProgress} max="100" />
             </div>
           )}
+          <div className='description-container'>
+            {loaderDescription}
+          </div>
         </div>
       )}
     </div>

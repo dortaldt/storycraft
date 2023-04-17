@@ -75,8 +75,8 @@ const imageLoaderValue = imageLoaderObject.value;
             />
             {index === currentIndex && currentText.length === content.value.length && (
               <div className="banner-container">
-                <p className="banner-text">Click anywhere to continue</p>
-              </div>
+                <p className="banner-text">Click anywhere to continue</p> 
+              </div>     
             )}
             {index === imageLoaderTriggerParagraph - 1 && showImageLoader && (
               <div className="image-loader-container">

@@ -42,23 +42,31 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse }) => {
   };
 
   const uploadImage = async (file) => {
-    const formData = new FormData();
-    formData.append('image', file);
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
 
-    const response = await axios.post(apiEndpoint, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-      onUploadProgress: (progressEvent) => {
-        const percentCompleted = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total
-        );
-        setUploadProgress(percentCompleted);
-      },
-    });
+      const response = await axios.post(apiEndpoint, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setUploadProgress(percentCompleted);
+        },
+      });
 
-    const processedImageUrl = response.data.imageUrl;
-    setImageSrc(processedImageUrl);
-    setUploadProgress(0);
-    setUploadedFile(null);
+      if (response && response.data && response.data.imageUrl) {
+        setImageSrc('response.data.imageUrl');
+      } else {
+        console.error('Invalid API response');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error.message || 'Unknown error');
+    } finally {
+      setUploadProgress(0);
+      setUploadedFile(null);
+    }
   };
 
   return (

@@ -78,7 +78,7 @@ function ParagraphBanner(props: {
             <ImageLoader
               defaultImageUrl={defaultImageUrl}
               apiEndpoint={apiEndpoint}
-              onResponse={() => setShowImageLoader(false)}
+              onResponse={() => setShowImageLoader(true)}
               active={showImageLoader}
             />
             <p className="image-loader-description">{imageLoaderDescription}</p>

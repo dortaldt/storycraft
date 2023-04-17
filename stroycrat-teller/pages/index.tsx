@@ -17,7 +17,7 @@ function App() {
         { type: 'paragraph', value: 'Paragraph 1/nfor Category 1' },
         { type: 'paragraph', value: 'Paragraph 2 for Category 1' },
         { type: 'paragraph', value: 'Paragraph 3 for Category 1' },
-        { type: 'imageLoader', value: 'The story starts in your childs room, creating a familiar base for a magical journey. This connection immerses them in the narrative, engaging with characters and plot.'},
+        { type: 'imageLoader', value: 'The story starts in your childs room, creating a familiar base for a magical journey. This connection immerses them in the narrative, engaging with characters and plot.'}
       ],
       selected: false,
     },

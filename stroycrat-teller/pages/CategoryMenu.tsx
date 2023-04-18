@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories: any[]; }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (category: React.SetStateAction<null>) => {
     setSelectedCategory(category);
     props.onCategorySelect(category);
   };
 
-  const getCardClassName = (category) => {
+  const getCardClassName = (category: { id: any; }) => {
     if (!selectedCategory) {
       return 'category-card';
     }

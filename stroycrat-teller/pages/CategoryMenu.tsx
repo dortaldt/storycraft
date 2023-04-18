@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CategoryMenu = (props) => {
+const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories: any[]; }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleCategoryClick = (category) => {

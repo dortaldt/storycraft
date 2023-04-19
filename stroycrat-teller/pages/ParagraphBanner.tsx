@@ -26,7 +26,7 @@ function ParagraphBanner(props: {
         if (currentContent.type === 'paragraph') {
           const newCurrentText = currentContent.value.slice(0, currentText.length + 1);
           setCurrentText(newCurrentText);
-          if (newCurrentText === currentContent.value && inputValue !== '') {
+          if (newCurrentText === currentContent.value) {
             clearInterval(interval);
             setBannerShowing(true);
           }
@@ -88,7 +88,7 @@ const imageLoaderObject = paragraphs.find(content => content.type === 'imageLoad
 const imageLoaderValue = imageLoaderObject.value;
 
   return (
-    <div className="paragraph-banner-container" onClick={handleScreenClick}>
+    <div className="paragraph-banner-container">
       <div className="paragraph-container">
       {paragraphs
         .filter((content) => content.type === 'paragraph')
@@ -132,8 +132,8 @@ const imageLoaderValue = imageLoaderObject.value;
                 />
               </div>
             )}
-            {bannerShowing && (
-              <div className="banner-container">
+            {bannerShowing && index === currentIndex &&(
+              <div className="banner-container"  onClick={handleScreenClick}>
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>     
             )}            

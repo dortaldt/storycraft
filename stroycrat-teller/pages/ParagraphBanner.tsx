@@ -26,9 +26,9 @@ function ParagraphBanner(props: {
         if (currentContent.type === 'paragraph') {
           const newCurrentText = currentContent.value.slice(0, currentText.length + 1);
           setCurrentText(newCurrentText);
-          if (newCurrentText === currentContent.value) {
+          if (newCurrentText === currentContent.value && inputValue !== '') {
             clearInterval(interval);
-            // setBannerShowing(true);
+            setBannerShowing(true);
           }
           if (currentIndex === imageLoaderTriggerParagraph - 1 && newCurrentText === currentContent.value) {
             setTypingEnded(true);
@@ -62,6 +62,12 @@ function ParagraphBanner(props: {
 
   const handleInputSubmission = () => {
     setBannerShowing(true);
+  };
+
+  const handleResponse = () => {
+    setShowImageLoader(true);
+    setBannerShowing(true)
+    // Call your desired function here, e.g. anotherFunction();
   };
 
   const createMarkup = (text) => {
@@ -114,21 +120,22 @@ const imageLoaderValue = imageLoaderObject.value;
                 )}
               </div>
             )}
-            {bannerShowing && (
-              <div className="banner-container">
-                <p className="banner-text">Click anywhere to continue</p> 
-              </div>     
-            )}
+
             {index === imageLoaderTriggerParagraph - 1 && showImageLoader && (
               <div className="image-loader-container">
                 <ImageLoader
                   defaultImageUrl={defaultImageUrl}
                   apiEndpoint={apiEndpoint}
-                  onResponse={() => setShowImageLoader(true)}
+                  onResponse={handleResponse}
                   active={showImageLoader}
                   loaderDescription={imageLoaderValue}
                 />
               </div>
+            )}
+            {bannerShowing && (
+              <div className="banner-container">
+                <p className="banner-text">Click anywhere to continue</p> 
+              </div>     
             )}            
           </div>
         ))}

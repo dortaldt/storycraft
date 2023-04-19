@@ -20,37 +20,29 @@ function ParagraphBanner(props: {
   const [formSubmitted, setFormSubmitted] = useState(false)
 
   useEffect(() => {
-    
     if (currentIndex < paragraphs.length) {
       const interval = setInterval(() => {
         const currentContent = paragraphs[currentIndex];
         if (currentContent.type === 'paragraph') {
-          const newCurrentText = currentContent.value.slice(0, currentText.length + 1);
+          let targetText = currentContent.value;
+          const newCurrentText = targetText.slice(0, currentText.length + 1);
           setCurrentText(newCurrentText);
-          if (newCurrentText === currentContent.value) {
+          if (newCurrentText === targetText) {
             clearInterval(interval);
             setBannerShowing(true);
           }
           // Check if currentIndex is in the imageLoaderTriggerParagraph array
-          if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === currentContent.value) {
-            
-            setTypingEnded(true);
-            const imageLoaderObject = paragraphs.find(item => item.type === 'imageLoader');
-            if (imageLoaderObject) {
-              setImageLoaderDescription(imageLoaderObject.value);
-            } else {
-  console.log('No imageLoader found in the content.');
-}
-            setShowImageLoader(true);
+          if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === targetText) {
+            // ...
           }
         } else if (currentContent.type === 'imageLoader') {
-          // setImageLoaderDescription(currentContent.value);
-          // setShowImageLoader(true);
+          // ...
         }
       }, 10);
       return () => clearInterval(interval);
     }
-  }, [currentIndex, currentText, paragraphs, imageLoaderTriggerParagraph]);
+  }, [currentIndex, currentText, paragraphs, imageLoaderTriggerParagraph, formSelection, inputValue, formSubmitted]);
+  
 
   const handleScreenClick = () => {
     if (bannerShowing && currentIndex < paragraphs.length - 1) {
@@ -83,14 +75,14 @@ function ParagraphBanner(props: {
     setBannerShowing(false)
   }
 
-  const createMarkup = (text) => {
+  const createMarkup = (text, index) => {
     let modifiedText = text.replace(/\/n/g, '<br />');
-    // if (formSelection) {
-    //   modifiedText = modifiedText.replace('{formSelection}', formSelection);
-    // }
-    // if (inputValue) {
-    //   modifiedText = modifiedText.replace('{inputValue}', inputValue);
-    // }
+    if (index === 0 && formSelection !== '') {
+      modifiedText = `${modifiedText} ${formSelection}`;
+    }
+    if (index === 0 && inputValue !== '') {
+      modifiedText = `${modifiedText} ${inputValue}`;
+    }
     return { __html: modifiedText };
   };
 
@@ -111,7 +103,7 @@ const imageLoaderValue = imageLoaderObject.value;
             <p
               className="paragraph-text"
               style={{ opacity: index === currentIndex ? 1 : 0.5 }}
-              dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value)}
+              dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value, index)}
             />
             {index === 0 && currentText.length === content.value.length && !formSubmitted &&(
               <div className="form-container">
@@ -128,7 +120,7 @@ const imageLoaderValue = imageLoaderObject.value;
                       onChange={handleInputChange}
                       placeholder="Enter a word"
                     />
-                    <button onClick={handleInputSubmission}>Submit</button>
+                    <button onClick={handleInputSubmission}>Let's start</button>
                   </>
                 )}
               </div>

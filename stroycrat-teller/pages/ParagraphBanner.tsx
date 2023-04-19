@@ -4,7 +4,7 @@ import { type } from 'os';
 
 function ParagraphBanner(props: {
     paragraphs: any;
-    imageLoaderTriggerParagraph: any;
+    imageLoaderTriggerParagraph: number[];
     defaultImageUrl: string;
     apiEndpoint: string;
   }) {
@@ -31,7 +31,8 @@ function ParagraphBanner(props: {
             clearInterval(interval);
             setBannerShowing(true);
           }
-          if (currentIndex === imageLoaderTriggerParagraph - 1 && newCurrentText === currentContent.value) {
+          // Check if currentIndex is in the imageLoaderTriggerParagraph array
+          if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === currentContent.value) {
             setTypingEnded(true);
             setImageLoaderDescription(paragraphs[currentIndex + 1].value);
             setShowImageLoader(true);
@@ -123,14 +124,14 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
             )}
 
-            {index === imageLoaderTriggerParagraph - 1 && showImageLoader && (
+            {imageLoaderTriggerParagraph.includes(index + 1) && showImageLoader && (
               <div className="image-loader-container">
                 <ImageLoader
                   defaultImageUrl={defaultImageUrl}
                   apiEndpoint={apiEndpoint}
                   onResponse={handleResponse}
                   active={showImageLoader}
-                  loaderDescription={imageLoaderValue}
+                  loaderDescription={imageLoaderDescription}
                 />
               </div>
             )}

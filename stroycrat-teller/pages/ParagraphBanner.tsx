@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ImageLoader from './ImageLoader';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+
 import { type } from 'os';
 
 function ParagraphBanner(props: {
@@ -109,8 +112,10 @@ const imageLoaderValue = imageLoaderObject.value;
               <div className="form-container">
                 {formSelection === '' ? (
                   <>
-                    <button onClick={() => handleToggleSelection('boy')}>Boy</button>
-                    <button onClick={() => handleToggleSelection('girl')}>Girl</button>
+                    <div className='form-buttons-container'>
+                      <button className='toggle toggle-left' onClick={() => handleToggleSelection('boy')}>Boy</button>
+                      <button className='toggle toggle-right' onClick={() => handleToggleSelection('girl')}>Girl</button>
+                    </div>
                   </>
                 ) : (
                   <>
@@ -138,11 +143,19 @@ const imageLoaderValue = imageLoaderObject.value;
                 />
               </div>
             )}
-            {bannerShowing && index === currentIndex && formSubmitted &&(
-              <div className="banner-container"  onClick={handleScreenClick}>
-                <p className="banner-text">Click anywhere to continue</p> 
-              </div>     
-            )}            
+            <TransitionGroup component={null}>
+              {bannerShowing && index === currentIndex && formSubmitted &&(
+                <CSSTransition
+                key="form-container"
+                timeout={300}
+                classNames="banner-container-transition"
+                >
+                <div className="banner-container"  onClick={handleScreenClick}>
+                  <p className="banner-text">Click anywhere to continue</p> 
+                </div>
+                </CSSTransition>     
+              )}          
+            </TransitionGroup>  
           </div>
         ))}
       </div>

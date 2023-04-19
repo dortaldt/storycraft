@@ -40,6 +40,45 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.form-buttons-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.toggle {
+  border: 0;
+  width: 100%;
+}
+
+.toggle-left {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.toggle-right {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.banner-container-transition-enter {
+  opacity: 0;
+}
+
+.banner-container-transition-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.banner-container-transition-exit {
+  opacity: 1;
+}
+
+.banner-container-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
 
 
 .buttons-container {

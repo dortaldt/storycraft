@@ -15,6 +15,8 @@ function ParagraphBanner(props: {
   const [typingEnded, setTypingEnded] = useState(false);
   const [showImageLoader, setShowImageLoader] = useState(false);
   const [imageLoaderDescription, setImageLoaderDescription] = useState('');
+  const [formSelection, setFormSelection] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     
@@ -26,7 +28,7 @@ function ParagraphBanner(props: {
           setCurrentText(newCurrentText);
           if (newCurrentText === currentContent.value) {
             clearInterval(interval);
-            setBannerShowing(true);
+            // setBannerShowing(true);
           }
           if (currentIndex === imageLoaderTriggerParagraph - 1 && newCurrentText === currentContent.value) {
             setTypingEnded(true);
@@ -50,8 +52,27 @@ function ParagraphBanner(props: {
     }
   };
 
-  const createMarkup = (text: string) => {
-    return { __html: text.replace(/\/n/g, '<br />') };
+  const handleToggleSelection = (selection) => {
+    setFormSelection(selection);
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleInputSubmission = () => {
+    setBannerShowing(true);
+  };
+
+  const createMarkup = (text) => {
+    let modifiedText = text.replace(/\/n/g, '<br />');
+    if (formSelection) {
+      modifiedText = modifiedText.replace('{formSelection}', formSelection);
+    }
+    if (inputValue) {
+      modifiedText = modifiedText.replace('{inputValue}', inputValue);
+    }
+    return { __html: modifiedText };
   };
 
   // Find the first object with the 'type' value "imageLoader" in the 'paragraphs' prop
@@ -73,7 +94,27 @@ const imageLoaderValue = imageLoaderObject.value;
               style={{ opacity: index === currentIndex ? 1 : 0.5 }}
               dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value)}
             />
-            {index === currentIndex && currentText.length === content.value.length && index !== imageLoaderTriggerParagraph - 1 && (
+            {index === 0 && currentText.length === content.value.length && (
+              <div className="form-container">
+                {formSelection === '' ? (
+                  <>
+                    <button onClick={() => handleToggleSelection('boy')}>Boy</button>
+                    <button onClick={() => handleToggleSelection('girl')}>Girl</button>
+                  </>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      value={inputValue}
+                      onChange={handleInputChange}
+                      placeholder="Enter a word"
+                    />
+                    <button onClick={handleInputSubmission}>Submit</button>
+                  </>
+                )}
+              </div>
+            )}
+            {bannerShowing && (
               <div className="banner-container">
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>     
@@ -88,7 +129,7 @@ const imageLoaderValue = imageLoaderObject.value;
                   loaderDescription={imageLoaderValue}
                 />
               </div>
-            )}
+            )}            
           </div>
         ))}
       </div>

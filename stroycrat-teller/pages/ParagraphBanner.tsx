@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ImageLoader from './ImageLoader';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
 import { type } from 'os';
@@ -143,19 +142,11 @@ const imageLoaderValue = imageLoaderObject.value;
                 />
               </div>
             )}
-            <TransitionGroup component={null}>
               {bannerShowing && index === currentIndex && formSubmitted &&(
-                <CSSTransition
-                key="form-container"
-                timeout={300}
-                classNames="banner-container-transition"
-                >
                 <div className="banner-container"  onClick={handleScreenClick}>
                   <p className="banner-text">Click anywhere to continue</p> 
                 </div>
-                </CSSTransition>     
               )}          
-            </TransitionGroup>  
           </div>
         ))}
       </div>

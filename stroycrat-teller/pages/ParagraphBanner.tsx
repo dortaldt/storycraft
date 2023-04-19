@@ -17,6 +17,7 @@ function ParagraphBanner(props: {
   const [imageLoaderDescription, setImageLoaderDescription] = useState('');
   const [formSelection, setFormSelection] = useState('');
   const [inputValue, setInputValue] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   useEffect(() => {
     
@@ -61,7 +62,8 @@ function ParagraphBanner(props: {
   };
 
   const handleInputSubmission = () => {
-    setBannerShowing(true);
+    // setBannerShowing(true);
+    setFormSubmitted(true)
   };
 
   const handleResponse = () => {
@@ -72,12 +74,12 @@ function ParagraphBanner(props: {
 
   const createMarkup = (text) => {
     let modifiedText = text.replace(/\/n/g, '<br />');
-    if (formSelection) {
-      modifiedText = modifiedText.replace('{formSelection}', formSelection);
-    }
-    if (inputValue) {
-      modifiedText = modifiedText.replace('{inputValue}', inputValue);
-    }
+    // if (formSelection) {
+    //   modifiedText = modifiedText.replace('{formSelection}', formSelection);
+    // }
+    // if (inputValue) {
+    //   modifiedText = modifiedText.replace('{inputValue}', inputValue);
+    // }
     return { __html: modifiedText };
   };
 
@@ -100,7 +102,7 @@ const imageLoaderValue = imageLoaderObject.value;
               style={{ opacity: index === currentIndex ? 1 : 0.5 }}
               dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value)}
             />
-            {index === 0 && currentText.length === content.value.length && (
+            {index === 0 && currentText.length === content.value.length && !formSubmitted &&(
               <div className="form-container">
                 {formSelection === '' ? (
                   <>
@@ -132,7 +134,7 @@ const imageLoaderValue = imageLoaderObject.value;
                 />
               </div>
             )}
-            {bannerShowing && index === currentIndex &&(
+            {bannerShowing && index === currentIndex && formSubmitted &&(
               <div className="banner-container"  onClick={handleScreenClick}>
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>     

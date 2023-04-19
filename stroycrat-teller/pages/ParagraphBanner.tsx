@@ -35,6 +35,7 @@ function ParagraphBanner(props: {
           }
           // Check if currentIndex is in the imageLoaderTriggerParagraph array
           if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === targetText) {
+            setShowImageLoader(true)
             // ...
           }
         } else if (currentContent.type === 'imageLoader') {

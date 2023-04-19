@@ -33,8 +33,14 @@ function ParagraphBanner(props: {
           }
           // Check if currentIndex is in the imageLoaderTriggerParagraph array
           if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === currentContent.value) {
+            
             setTypingEnded(true);
-            setImageLoaderDescription(paragraphs[currentIndex + 1].value);
+            const imageLoaderObject = paragraphs.find(item => item.type === 'imageLoader');
+            if (imageLoaderObject) {
+              setImageLoaderDescription(imageLoaderObject.value);
+            } else {
+  console.log('No imageLoader found in the content.');
+}
             setShowImageLoader(true);
           }
         } else if (currentContent.type === 'imageLoader') {
@@ -72,6 +78,10 @@ function ParagraphBanner(props: {
     setBannerShowing(true)
     // Call your desired function here, e.g. anotherFunction();
   };
+
+  const turnOffBanner = () => {
+    setBannerShowing(false)
+  }
 
   const createMarkup = (text) => {
     let modifiedText = text.replace(/\/n/g, '<br />');
@@ -132,6 +142,7 @@ const imageLoaderValue = imageLoaderObject.value;
                   onResponse={handleResponse}
                   active={showImageLoader}
                   loaderDescription={imageLoaderDescription}
+                  turnOffBanner={turnOffBanner}
                 />
               </div>
             )}

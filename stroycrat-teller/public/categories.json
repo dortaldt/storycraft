@@ -20,7 +20,7 @@
       "title": "Category 2",
       "description": "This is a short description of category 2",
       "image": "https://static.wixstatic.com/media/845144_e07869a00e394209b07d7efd22ce799a~mv2.png/v1/fill/w_344,h_344,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/wb17.png",
-      "triggerParagraph": 3,
+      "triggerParagraph": [3],
       "content": [
         { "type": "paragraph", "value": "Paragraph 1 for Category 2" },
         { "type": "paragraph", "value": "Paragraph 2 for Category 2" },
@@ -34,7 +34,7 @@
       "title": "Category 3",
       "description": "This is a short description of category 3",
       "image": "https://via.placeholder.com/150",
-      "triggerParagraph": 3,
+      "triggerParagraph": [3],
       "content": [
         { "type": "paragraph", "value": "Paragraph 1 for Category 3" },
         { "type": "paragraph", "value": "Paragraph 2 for Category 3" },

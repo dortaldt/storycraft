@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription }) => {
+const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -10,6 +10,8 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
 
   const fileInputRef = useRef(null);
+
+  {turnOffBanner}
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];

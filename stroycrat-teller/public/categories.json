@@ -11,7 +11,8 @@
         { "type": "paragraph", "value": "One day, NAME woke up feeling scared. She had been having nightmares about monsters, and she was afraid to go outside and play. She didn't know how to be brave and face her fears." },
         { "type": "paragraph", "value": "As NAME sat in her room, something magical happened, the walls of her room began to glow..."},
         { "type": "paragraph", "value": "One day, NAME woke up feeling scared. She had been having nightmares about monsters, and she was afraid to go outside and play. She didn't know how to be brave and face her fears." },
-        { "type": "imageLoader", "value": "The story starts in your child's room, creating a familiar base for a magical journey. This connection immerses them in the narrative, engaging with characters and plot." }
+        { "type": "imageLoader", "id":1, "value": "first imageLoader description" },
+        { "type": "imageLoader", "id":2, "value": "Second imageLoader description" }
       ],
       "selected": false
     },

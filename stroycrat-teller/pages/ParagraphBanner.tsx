@@ -20,6 +20,7 @@ function ParagraphBanner(props: {
   const [formSelection, setFormSelection] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [activeImageLoader, setActiveImageLoader] = useState(1)
 
   useEffect(() => {
     if (currentIndex < paragraphs.length) {
@@ -30,11 +31,16 @@ function ParagraphBanner(props: {
           const newCurrentText = targetText.slice(0, currentText.length + 1);
           setCurrentText(newCurrentText);
           if (newCurrentText === targetText) {
+            setBannerShowing(true)
             clearInterval(interval);
           }
           // Check if currentIndex is in the imageLoaderTriggerParagraph array
           if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === targetText) {
             setShowImageLoader(true)
+            // This one should be modified
+            const imageLoaderObject = paragraphs.find(content => content.type === 'imageLoader' && content.id === activeImageLoader);
+              // Update the imageLoaderDescription state with the value of the found object
+              setImageLoaderDescription(imageLoaderObject.value);
             // ...
           }
         } else if (currentContent.type === 'imageLoader') {
@@ -45,7 +51,6 @@ function ParagraphBanner(props: {
     }
   }, [currentIndex, currentText, paragraphs, imageLoaderTriggerParagraph, formSelection, inputValue, formSubmitted]);
   
-
   const handleScreenClick = () => {
     if (bannerShowing && currentIndex < paragraphs.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -70,6 +75,7 @@ function ParagraphBanner(props: {
   const handleResponse = () => {
     setShowImageLoader(true);
     setBannerShowing(true)
+    setActiveImageLoader(activeImageLoader + 1)
     // Call your desired function here, e.g. anotherFunction();
   };
 

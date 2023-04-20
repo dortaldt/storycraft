@@ -17,6 +17,19 @@ const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories
 
   return (
     <div className="category-menu">
+      <div className='header'>
+        <div className='opening-text'>
+          <span>I want to </span>
+          <span className='text-highlight'>empower </span>
+          <span>my child with</span>
+          {selectedCategory !== null &&(
+            <span> {selectedCategory.title}</span>
+          )}
+        </div>
+        <div className={'sub-title ' + (selectedCategory !== null ? 'fade-hidden' : 'fade')}>
+          <p>Pick a theme to create a fantastic story for your child</p>
+        </div>
+      </div>
       {props.categories.map((category) => (
         <div
           className={getCardClassName(category)}

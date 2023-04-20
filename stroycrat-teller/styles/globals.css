@@ -100,8 +100,8 @@ font-weight: 500;
   margin-bottom: 1rem;
   width: 100%;
   margin: 24px;
-  background-color: #101010;
-  border: 1px solid #ccc;
+  background-color: #2f2f2f;
+  border: 1px solid #414141;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -113,10 +113,13 @@ font-weight: 500;
 
 .category-title {
   margin-top: 0;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .category-description {
   margin-bottom: 0;
+  font-weight: 300;
 }
 
 .category-image {
@@ -156,12 +159,14 @@ font-weight: 500;
 
 .fade {
   opacity: 1;
-  transition: opacity 500ms ease-in-out;
+  height: auto;
+  transition: all 500ms ease-in-out;
 }
 
 .fade-hidden {
   opacity: 0;
-  transition: opacity 500ms ease-in-out;
+  height: 0px;
+  transition: all 500ms ease-in-out;
 }
 
 .text-input-container {
@@ -177,4 +182,23 @@ font-weight: 500;
   background-color: #2e2e2e;
   border: 0;
   color: white ;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+}
+
+.opening-text {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.text-highlight {
+  color: #ff1bf4;
+}
+
+.sub-title {
+
 }

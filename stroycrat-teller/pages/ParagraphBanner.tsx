@@ -31,7 +31,6 @@ function ParagraphBanner(props: {
           setCurrentText(newCurrentText);
           if (newCurrentText === targetText) {
             clearInterval(interval);
-            setBannerShowing(true);
           }
           // Check if currentIndex is in the imageLoaderTriggerParagraph array
           if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === targetText) {
@@ -64,7 +63,7 @@ function ParagraphBanner(props: {
   };
 
   const handleInputSubmission = () => {
-    // setBannerShowing(true);
+    setBannerShowing(true);
     setFormSubmitted(true)
   };
 
@@ -81,7 +80,7 @@ function ParagraphBanner(props: {
   const createMarkup = (text, index) => {
     let modifiedText = text.replace(/\/n/g, '<br />');
     if (index === 0 && formSelection !== '') {
-      modifiedText = `${modifiedText} ${formSelection}`;
+      modifiedText = `${modifiedText} ${formSelection} named `;
     }
     if (index === 0 && inputValue !== '') {
       modifiedText = `${modifiedText} ${inputValue}`;
@@ -119,13 +118,16 @@ const imageLoaderValue = imageLoaderObject.value;
                   </>
                 ) : (
                   <>
-                    <input
-                      type="text"
-                      value={inputValue}
-                      onChange={handleInputChange}
-                      placeholder="Enter a word"
-                    />
-                    <button onClick={handleInputSubmission}>Let's start</button>
+                    <div className='text-input-container'>
+                      <input
+                        type="text"
+                        className='text-field'
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        placeholder="Child's name"
+                      />
+                      <button onClick={handleInputSubmission}>Let's start</button>
+                    </div>
                   </>
                 )}
               </div>
@@ -143,11 +145,13 @@ const imageLoaderValue = imageLoaderObject.value;
                 />
               </div>
             )}
-              {bannerShowing && index === currentIndex && formSubmitted &&(
-                <div className="banner-container"  onClick={handleScreenClick}>
-                  <p className="banner-text">Click anywhere to continue</p> 
-                </div>
-              )}          
+
+            {bannerShowing && index === currentIndex && formSubmitted &&(
+              <div className="banner-container"  onClick={handleScreenClick}>
+                <p className="banner-text">Click anywhere to continue</p> 
+              </div>
+            )}          
+
           </div>
         ))}
       </div>

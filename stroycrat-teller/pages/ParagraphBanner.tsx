@@ -46,7 +46,7 @@ function ParagraphBanner(props: {
         } else if (currentContent.type === 'imageLoader') {
           // ...
         }
-      }, 10);
+      }, 30);
       return () => clearInterval(interval);
     }
   }, [currentIndex, currentText, paragraphs, imageLoaderTriggerParagraph, formSelection, inputValue, formSubmitted]);

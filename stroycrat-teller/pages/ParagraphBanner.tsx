@@ -22,34 +22,61 @@ function ParagraphBanner(props: {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [activeImageLoader, setActiveImageLoader] = useState(1)
 
-  useEffect(() => {
-    if (currentIndex < paragraphs.length) {
-      const interval = setInterval(() => {
-        const currentContent = paragraphs[currentIndex];
-        if (currentContent.type === 'paragraph') {
-          let targetText = currentContent.value;
-          const newCurrentText = targetText.slice(0, currentText.length + 1);
-          setCurrentText(newCurrentText);
-          if (newCurrentText === targetText) {
-            setBannerShowing(true)
-            clearInterval(interval);
-          }
-          // Check if currentIndex is in the imageLoaderTriggerParagraph array
-          if (imageLoaderTriggerParagraph.includes(currentIndex + 1) && newCurrentText === targetText) {
-            setShowImageLoader(true)
-            // This one should be modified
-            const imageLoaderObject = paragraphs.find(content => content.type === 'imageLoader' && content.id === activeImageLoader);
-              // Update the imageLoaderDescription state with the value of the found object
-              setImageLoaderDescription(imageLoaderObject.value);
-            // ...
-          }
-        } else if (currentContent.type === 'imageLoader') {
-          // ...
+  // This effect is responsible for updating the current text and handling image loading
+useEffect(() => {
+  // Check if the currentIndex is within the paragraphs array
+  if (currentIndex < paragraphs.length) {
+    const interval = setInterval(() => {
+      const currentContent = paragraphs[currentIndex];
+
+      // Handle paragraph content type
+      if (currentContent.type === 'paragraph') {
+        const targetText = currentContent.value;
+        const newCurrentText = targetText.slice(0, currentText.length + 1);
+        setCurrentText(newCurrentText);
+
+        // If the newCurrentText matches the targetText, show the banner and clear the interval
+        if (newCurrentText === targetText) {
+          setBannerShowing(true);
+          clearInterval(interval);
         }
-      }, 30);
-      return () => clearInterval(interval);
-    }
-  }, [currentIndex, currentText, paragraphs, imageLoaderTriggerParagraph, formSelection, inputValue, formSubmitted]);
+
+        // Handle the image loading trigger
+        if (
+          imageLoaderTriggerParagraph.includes(currentIndex + 1) &&
+          newCurrentText === targetText
+        ) {
+          setShowImageLoader(true);
+
+          // Find the imageLoader object with the activeImageLoader id
+          const imageLoaderObject = paragraphs.find(
+            (content) =>
+              content.type === 'imageLoader' && content.id === activeImageLoader
+          );
+
+          // Update the imageLoaderDescription state with the value of the found object
+          setImageLoaderDescription(imageLoaderObject.value);
+        }
+      } 
+      // Handle imageLoader content type
+      else if (currentContent.type === 'imageLoader') {
+        // Add functionality for handling imageLoader content type here
+      }
+    }, 10);
+
+    // Cleanup function to clear the interval when the effect is no longer needed
+    return () => clearInterval(interval);
+  }
+}, [
+  currentIndex,
+  currentText,
+  paragraphs,
+  imageLoaderTriggerParagraph,
+  formSelection,
+  inputValue,
+  formSubmitted,
+]);
+
   
   const handleScreenClick = () => {
     if (bannerShowing && currentIndex < paragraphs.length - 1) {

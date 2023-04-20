@@ -26,6 +26,7 @@ function ParagraphBanner(props: {
 useEffect(() => {
   // Check if the currentIndex is within the paragraphs array
   if (currentIndex < paragraphs.length) {
+    setTypingEnded(false)
     const interval = setInterval(() => {
       const currentContent = paragraphs[currentIndex];
 
@@ -38,6 +39,7 @@ useEffect(() => {
         // If the newCurrentText matches the targetText, show the banner and clear the interval
         if (newCurrentText === targetText) {
           setBannerShowing(true);
+          setTypingEnded(true)
           clearInterval(interval);
         }
 
@@ -102,7 +104,7 @@ useEffect(() => {
   const handleResponse = () => {
     setShowImageLoader(true);
     setBannerShowing(true)
-    setActiveImageLoader(activeImageLoader + 1)
+    // setActiveImageLoader(activeImageLoader + 1)
     // Call your desired function here, e.g. anotherFunction();
   };
 

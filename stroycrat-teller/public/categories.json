@@ -26,7 +26,7 @@
         { "type": "paragraph", "value": "Paragraph 1 for Category 2" },
         { "type": "paragraph", "value": "Paragraph 2 for Category 2" },
         { "type": "paragraph", "value": "Paragraph 3 for Category 2" },
-        { "type": "imageLoader", "value": "ImageLoader description for Category 2" }
+        { "type": "imageLoader", "id": 1, "value": "ImageLoader description for Category 2" }
       ],
       "selected": false
     },
@@ -40,7 +40,7 @@
         { "type": "paragraph", "value": "Paragraph 1 for Category 3" },
         { "type": "paragraph", "value": "Paragraph 2 for Category 3" },
         { "type": "paragraph", "value": "Paragraph 3 for Category 3" },
-        { "type": "imageLoader", "value": "ImageLoader description for Category 3" }
+        { "type": "imageLoader", "id": 1, "value": "ImageLoader description for Category 3" }
       ],
       "selected": false
     }

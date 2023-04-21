@@ -167,19 +167,6 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
             )}
 
-            {(
-              <div className={activeImageLoader >= index ? 'yes' : 'no'}>
-              </div>
-            )}
-            {(
-              <div className={'index is ' +index}>
-              </div>
-            )}
-            {(
-              <div className={'activeImageLoader is ' +activeImageLoader}>
-              </div>
-            )}
-
             {imageLoaderTriggerParagraph.includes(index + 1) && showImageLoader && activeImageLoader >= index - 1 && (
               <div className="image-loader-container">
                 <ImageLoader
@@ -193,12 +180,14 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
             )}
 
-            {bannerShowing && index === currentIndex && formSubmitted && (
-              <div className="banner-container"  onClick={handleScreenClick}>
+              <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === paragraphs.length && typingEnded ? '' : 'hidden')}>
+                Last Par Component
+              </div>
+
+              <div className={"banner-container " + (bannerShowing && index === currentIndex && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>
-            )}          
-
+              
           </div>
         ))}
       </div>

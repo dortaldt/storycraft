@@ -21,6 +21,7 @@ function ParagraphBanner(props: {
   const [inputValue, setInputValue] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [activeImageLoader, setActiveImageLoader] = useState(0)
+  const [defaultImage, setDefaultImage] = useState ('')
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -56,7 +57,8 @@ useEffect(() => {
                 content.type === 'imageLoader' && content.id === activeImageLoader + 1
             );
             // Update the imageLoaderDescription state with the value of the found object
-            setImageLoaderDescription(imageLoaderObject.value);
+            setImageLoaderDescription(imageLoaderObject.value)
+            setDefaultImage(imageLoaderObject.default_image);
             setActiveImageLoader(activeImageLoader + 1)
           }
       } 
@@ -170,7 +172,7 @@ const imageLoaderValue = imageLoaderObject.value;
             {imageLoaderTriggerParagraph.includes(index + 1) && showImageLoader && activeImageLoader >= index - 1 && (
               <div className="image-loader-container">
                 <ImageLoader
-                  defaultImageUrl={defaultImageUrl}
+                  defaultImageUrl={defaultImage}
                   apiEndpoint={apiEndpoint}
                   onResponse={handleResponse}
                   active={showImageLoader}
@@ -187,7 +189,7 @@ const imageLoaderValue = imageLoaderObject.value;
               <div className={"banner-container " + (bannerShowing && index === currentIndex && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>
-              
+
           </div>
         ))}
       </div>

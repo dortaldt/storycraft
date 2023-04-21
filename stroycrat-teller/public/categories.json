@@ -6,13 +6,31 @@
       "image": "https://static.wixstatic.com/media/845144_f3aae4b50c8445a78166af9355075563~mv2.png/v1/fill/w_344,h_344,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/wb23-removebg-preview.png",
       "triggerParagraph": [2,4],
       "content": [
-        { "type": "paragraph", "value": "Once upon a time, in a land far, far away, there lived a little" },
-        { "type": "paragraph", "value": "NAME was a bright and curious child, with a passion for exploring the world around her. She loved nothing more than going on adventures and discovering new things." },
-        { "type": "paragraph", "value": "One day, NAME woke up feeling scared. She had been having nightmares about monsters, and she was afraid to go outside and play. She didn't know how to be brave and face her fears." },
-        { "type": "paragraph", "value": "As NAME sat in her room, something magical happened, the walls of her room began to glow..."},
-        { "type": "paragraph", "value": "One day, NAME woke up feeling scared. She had been having nightmares about monsters, and she was afraid to go outside and play. She didn't know how to be brave and face her fears." },
-        { "type": "imageLoader", "id":1, "value": "The story starts in your child's room, providing a familiar base for a magical adventure. This helps your child connect personally, immerse in the narrative, and engage with characters and plot." },
-        { "type": "imageLoader", "id":2, "value": "Let's introduce a familiar friend to join and help our hero on their voyage. Having a trusted companion by their side can help your child feel more secure and comfortable as they embark on their adventure. " }
+        { 
+          "type": "paragraph", 
+          "value": "Once upon a time, in a land far, far away, there lived a little" },
+        { 
+          "type": "paragraph", 
+          "value": "NAME was a bright and curious child, with a passion for exploring the world around her. She loved nothing more than going on adventures and discovering new things." },
+        { 
+          "type": "paragraph", 
+          "value": "One day, NAME woke up feeling scared. She had been having nightmares about monsters, and she was afraid to go outside and play. She didn't know how to be brave and face her fears." },
+        { 
+          "type": "paragraph", 
+          "value": "As NAME sat in her room, something magical happened, the walls of her room began to glow..."},
+        { 
+          "type": "paragraph", 
+          "value": "One day, NAME woke up feeling scared. She had been having nightmares about monsters, and she was afraid to go outside and play. She didn't know how to be brave and face her fears." },
+        { 
+          "type": "imageLoader", 
+          "default_image": "https://cdn.dribbble.com/users/33073/screenshots/14976792/media/03de033c310a7e9508bdb8664ea24a3b.png?compress=1&resize=1600x1200&vertical=top",
+          "id":1, 
+          "value": "The story starts in your child's room, providing a familiar base for a magical adventure. This helps your child connect personally, immerse in the narrative, and engage with characters and plot." },
+        { 
+          "type": "imageLoader", 
+          "default_image": "/image.jpeg",
+          "id":2,
+          "value": "Let's introduce a familiar friend to join and help our hero on their voyage. Having a trusted companion by their side can help your child feel more secure and comfortable as they embark on their adventure. " }
       ],
       "selected": false
     },

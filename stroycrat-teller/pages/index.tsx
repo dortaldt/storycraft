@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import ParagraphBanner from './ParagraphBanner';
 import CategoryMenu from './CategoryMenu';
-import ImageLoader from './ImageLoader';
 
 function App() {
   // Default image URL

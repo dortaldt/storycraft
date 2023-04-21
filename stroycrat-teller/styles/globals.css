@@ -94,12 +94,24 @@ font-weight: 700;
 }
 
 .banner-container {
+  opacity: 1;
   padding: 8px 16px;
-    height: fit-content;
-    line-height: 0px;
-    background-color: #282828;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
+  height: fit-content;
+  line-height: 0px;
+  background-color: #282828;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+}
+
+.banner-container.hidden {
+  opacity: 0;
+  display: block;
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: all 0.1s ease-in-out;
+  overflow: hidden;
 }
 
 .description-container {
@@ -157,15 +169,6 @@ font-weight: 700;
 
 .hidden {
   display: none;
-}
-
-.banner-container.hidden {
-  opacity: 0;
-  display: block;
-  height: 0;
-  padding: 0;
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
 }
 
 .selected .category-info {

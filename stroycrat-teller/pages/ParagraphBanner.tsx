@@ -20,7 +20,7 @@ function ParagraphBanner(props: {
   const [formSelection, setFormSelection] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false)
-  const [activeImageLoader, setActiveImageLoader] = useState(1)
+  const [activeImageLoader, setActiveImageLoader] = useState(0)
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -46,19 +46,19 @@ useEffect(() => {
         // Handle the image loading trigger
         if (
           imageLoaderTriggerParagraph.includes(currentIndex + 1) &&
-          newCurrentText === targetText
-        ) {
-          setShowImageLoader(true);
-
-          // Find the imageLoader object with the activeImageLoader id
-          const imageLoaderObject = paragraphs.find(
-            (content) =>
-              content.type === 'imageLoader' && content.id === activeImageLoader
-          );
-
-          // Update the imageLoaderDescription state with the value of the found object
-          setImageLoaderDescription(imageLoaderObject.value);
-        }
+          newCurrentText === targetText &&
+          typingEnded
+          ) {
+            setShowImageLoader(true);
+            // Find the imageLoader object with the activeImageLoader id
+            const imageLoaderObject = paragraphs.find(
+              (content) =>
+                content.type === 'imageLoader' && content.id === activeImageLoader + 1
+            );
+            // Update the imageLoaderDescription state with the value of the found object
+            setImageLoaderDescription(imageLoaderObject.value);
+            setActiveImageLoader(activeImageLoader + 1)
+          }
       } 
       // Handle imageLoader content type
       else if (currentContent.type === 'imageLoader') {
@@ -104,7 +104,6 @@ useEffect(() => {
   const handleResponse = () => {
     setShowImageLoader(true);
     setBannerShowing(true)
-    // setActiveImageLoader(activeImageLoader + 1)
     // Call your desired function here, e.g. anotherFunction();
   };
 
@@ -168,7 +167,20 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
             )}
 
-            {imageLoaderTriggerParagraph.includes(index + 1) && showImageLoader && (
+            {(
+              <div className={activeImageLoader >= index ? 'yes' : 'no'}>
+              </div>
+            )}
+            {(
+              <div className={'index is ' +index}>
+              </div>
+            )}
+            {(
+              <div className={'activeImageLoader is ' +activeImageLoader}>
+              </div>
+            )}
+
+            {imageLoaderTriggerParagraph.includes(index + 1) && showImageLoader && activeImageLoader >= index - 1 && (
               <div className="image-loader-container">
                 <ImageLoader
                   defaultImageUrl={defaultImageUrl}
@@ -181,7 +193,7 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
             )}
 
-            {bannerShowing && index === currentIndex && formSubmitted &&(
+            {bannerShowing && index === currentIndex && formSubmitted && (
               <div className="banner-container"  onClick={handleScreenClick}>
                 <p className="banner-text">Click anywhere to continue</p> 
               </div>

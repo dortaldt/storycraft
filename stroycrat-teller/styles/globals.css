@@ -159,6 +159,15 @@ font-weight: 700;
   display: none;
 }
 
+.banner-container.hidden {
+  opacity: 0;
+  display: block;
+  height: 0;
+  padding: 0;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
 .selected .category-info {
   display: none;
 }

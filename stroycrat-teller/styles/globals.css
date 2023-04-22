@@ -56,6 +56,10 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.form-container {
+  margin: 24px;
+}
+
 
 .form-buttons-container {
   display: flex;
@@ -80,20 +84,22 @@ button:disabled {
 .buttons-container {
   display: flex;
   flex-direction: column;
-  padding: 24px 0;
+  padding: 24px;
   gap: 24px;
 }
 
 .paragraph-banner-container {
-  margin: 24px;
+  /* margin: 24px; */
 }
 
 .paragraph-text {
-font-size: 2rem;
-font-weight: 700;
+  margin: 24px;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .banner-container {
+  margin: 24px;
   opacity: 1;
   padding: 8px 16px;
   height: fit-content;
@@ -191,16 +197,20 @@ font-weight: 700;
   border-radius: 8px;
 }
 
+.image-loader-container {
+  margin-bottom: 24px;
+}
+
 .fade {
   opacity: 1;
   height: auto;
-  transition: all 500ms ease-in-out;
+  transition: height 500ms ease-in-out;
 }
 
 .fade-hidden {
   opacity: 0;
   height: 0px;
-  transition: all 500ms ease-in-out;
+  transition: height 500ms ease-in-out;
 }
 
 .text-input-container {

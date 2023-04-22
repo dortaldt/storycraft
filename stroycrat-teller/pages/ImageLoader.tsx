@@ -107,7 +107,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
         <div className='buttons-container'>
 
           {firstImageUploaded && (
-            <div>
+            <div className='image-loader-buttons'>
             <button type="button" onClick={handleSendToServer}>
               Transform
             </button>

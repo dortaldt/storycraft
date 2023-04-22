@@ -142,8 +142,6 @@ button:disabled {
   overflow: hidden;
 }
 
-.description-container {
-}
 
 .category-menu {
   display: flex;
@@ -281,11 +279,20 @@ button:disabled {
   transition: font-size 0.3s ease-in-out;
 }
 
-.last-paragrah {
-  padding: 24px;
+.last-para-wrapper {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
+
+.description-container {
+  background-color: #282828;
+}
+
+.last-paragrah {
+  padding: 24px;
+}
+
 
 .footer {
   width: 100%;

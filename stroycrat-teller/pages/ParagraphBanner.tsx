@@ -183,7 +183,11 @@ const imageLoaderValue = imageLoaderObject.value;
             )}
 
               <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === paragraphs.length && typingEnded ? '' : 'hidden')}>
-                <button>Continue the story</button>
+                <div className='last-para-wrapper'>
+                  <button>Continue the story</button>
+                  <div className='description-container'>If you're interested in reading about Jonathan’s full journey as he conquers his fears, we have personalized books you should check out. Where your child is the star of their story.Follow the link to discover more and order your very own copy of גםר's exciting adventure!
+                  </div>
+                </div>
               </div>
 
               <div className={"banner-container " + (bannerShowing && index === currentIndex && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>

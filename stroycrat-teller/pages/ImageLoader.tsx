@@ -84,7 +84,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
           <input
             type="file"
             accept="image/*"
-            capture="user"
+            // capture="user"
             ref={fileInputRef}
             onChange={handleImageUpload}
             style={{ display: 'none' }}

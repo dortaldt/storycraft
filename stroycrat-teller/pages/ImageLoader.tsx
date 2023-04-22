@@ -105,9 +105,22 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
       {showButtonsContainer && (
         <div className='buttons-container'>
+
+          {firstImageUploaded && (
+            <div>
+            <button type="button" onClick={handleSendToServer}>
+              Transform
+            </button>
+            <button type="button" className='btn-secondary' onClick={handleButtonClick}>
+              Reload another Image
+            </button>
+            </div>
+          )}
+          {!firstImageUploaded && (
           <button type="button" onClick={handleButtonClick}>
             Upload Image
           </button>
+          )}
           <input
             type="file"
             accept="image/*"
@@ -116,11 +129,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
             onChange={handleImageUpload}
             style={{ display: 'none' }}
           />
-          {firstImageUploaded && (
-            <button type="button" onClick={handleSendToServer}>
-              Send to Server
-            </button>
-          )}
+          
           {uploadProgress > 0 && (
             <div>
               <progress value={uploadProgress} max="100" />

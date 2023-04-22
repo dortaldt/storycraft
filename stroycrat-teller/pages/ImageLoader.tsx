@@ -11,20 +11,24 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
   const fileInputRef = useRef(null);
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
+  
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImageSrc(reader.result);
-      setUploadedFile(file);
+    reader.onloadend = async () => {
+      const originalImageDataUrl = reader.result;
+      const croppedImageBlob = await cropImage(originalImageDataUrl);
+      const croppedImageDataUrl = URL.createObjectURL(croppedImageBlob);
+      setImageSrc(croppedImageDataUrl);
+      setUploadedFile(croppedImageBlob);
       if (!firstImageUploaded) {
         setFirstImageUploaded(true);
       }
     };
   };
+  
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -36,13 +40,36 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     if (!uploadedFile) return;
   
     try {
-      await uploadImage(uploadedFile);
+      const croppedImageBlob = await cropImage(imageSrc);
+      await uploadImage(croppedImageBlob);
       onResponse(); // Call the onResponse callback after the image has been uploaded
       setShowButtonsContainer(false); // Hide the buttons container
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
+
+  const cropImage = (src) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const croppedSize = 512;
+        canvas.width = croppedSize;
+        canvas.height = croppedSize;
+  
+        const minDimension = Math.min(img.width, img.height);
+        const startX = (img.width - minDimension) / 2;
+        const startY = (img.height - minDimension) / 2;
+  
+        ctx.drawImage(img, startX, startY, minDimension, minDimension, 0, 0, croppedSize, croppedSize);
+        canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 1);
+      };
+    });
+  };
+  
   
 
   const uploadImage = async (file) => {

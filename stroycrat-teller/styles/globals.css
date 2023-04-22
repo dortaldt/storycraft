@@ -123,6 +123,7 @@ button:disabled {
 .banner-container {
   margin: 24px;
   opacity: 1;
+  text-align: center;
   padding: 8px 16px;
   height: fit-content;
   line-height: 0px;
@@ -286,7 +287,7 @@ button:disabled {
 }
 
 .description-container {
-  background-color: #282828;
+  /* background-color: #282828; */
 }
 
 .last-paragrah {

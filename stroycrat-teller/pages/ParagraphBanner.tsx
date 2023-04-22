@@ -191,7 +191,7 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
 
               <div className={"banner-container " + (bannerShowing && index === currentIndex && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
-                <p className="banner-text">Click anywhere to continue</p> 
+                <p className="banner-text">Continue</p> 
               </div>
 
           </div>

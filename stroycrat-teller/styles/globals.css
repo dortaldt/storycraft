@@ -1,5 +1,5 @@
 .App {
-  margin-bottom: 250px;
+  /* margin-bottom: 250px; */
 }
 
 body {
@@ -235,8 +235,9 @@ button:disabled {
 }
 
 .opening-text {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 100;
+  line-height: 3rem;
 }
 
 .text-highlight {
@@ -244,5 +245,21 @@ button:disabled {
 }
 
 .sub-title {
+  color: #cacaca;
 
+}
+
+.value-header {
+  font-size:  3rem;
+  transition: font-size 0.3s ease-in-out;
+}
+
+.footer {
+  width: 100%;
+  padding: 24px;
+  color: grey;
+}
+
+a {
+  color: #ff1bf4 ;
 }

@@ -61,34 +61,6 @@
           }
       ],
       "selected": false
-    },
-    {
-      "id": 3,
-      "title": "Category 3",
-      "description": "This is a short description of category 3",
-      "image": "https://via.placeholder.com/150",
-      "triggerParagraph": [3],
-      "content": [
-        {
-           "type": "paragraph",
-          "value": "Paragraph 1 for Category 3" 
-        },
-        {
-           "type": "paragraph", 
-           "value": "Paragraph 2 for Category 3" 
-          },
-        {
-           "type": "paragraph", 
-           "value": "Paragraph 3 for Category 3" 
-          },
-        {
-           "type": "imageLoader", 
-           "id": 1,
-           "default_image": "https://cdn.dribbble.com/users/33073/screenshots/14976792/media/03de033c310a7e9508bdb8664ea24a3b.png?compress=1&resize=1600x1200&vertical=top",
-           "value": "ImageLoader description for Category 3" 
-          }
-      ],
-      "selected": false
     }
   ]
   

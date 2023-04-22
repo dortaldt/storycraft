@@ -19,14 +19,14 @@ const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories
     <div className="category-menu">
       <div className='header'>
         <div className='opening-text'>
-          <span>I want to </span>
-          <span className='text-highlight'>empower </span>
-          <span>my child with</span>
+          <span className={(selectedCategory !== null ? 'hidden' : '')}>I want to </span>
+          <span className={'text-highlight ' + (selectedCategory !== null ? 'hidden' : '')} >empower </span>
+          <span className={(selectedCategory !== null ? 'hidden' : '')}>my child with</span>
           {selectedCategory !== null &&(
-            <span> {selectedCategory.title}</span>
+            <span className='value-header'> {selectedCategory.title}</span>
           )}
         </div>
-        <div className={'sub-title ' + (selectedCategory !== null ? 'fade-hidden' : 'fade')}>
+        <div className={'sub-title ' + (selectedCategory !== null ? 'hidden' : 'fade')}>
           <p>Pick a theme to create a fantastic story for your child</p>
         </div>
       </div>
@@ -43,6 +43,9 @@ const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories
           </div>
         </div>
       ))}
+        <div className={'footer ' + (selectedCategory !== null ? 'hidden' : 'fade')}>
+          <p>Powered by <a href='www.storycarft.ai'>Storycraft AI</a></p>
+        </div>
     </div>
   );
 };

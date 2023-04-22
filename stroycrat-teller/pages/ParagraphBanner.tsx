@@ -184,7 +184,9 @@ const imageLoaderValue = imageLoaderObject.value;
 
               <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === paragraphs.length && typingEnded ? '' : 'hidden')}>
                 <div className='last-para-wrapper'>
-                  <button>Continue the story</button>
+                  <a href="https://www.storycraft.ai">
+                    <button>Continue the story</button>
+                  </a>
                   <div className='description-container'>If you're interested in reading about Jonathan’s full journey as he conquers his fears, we have personalized books you should check out. Where your child is the star of their story.Follow the link to discover more and order your very own copy of גםר's exciting adventure!
                   </div>
                 </div>

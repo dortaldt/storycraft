@@ -286,6 +286,13 @@ button:disabled {
   gap: 1rem;
 }
 
+.last-para-wrapper a {
+  display: flex;
+  flex-direction: column;
+  color: transparent;
+  width: 100%;
+}
+
 .description-container {
   /* background-color: #282828; */
 }

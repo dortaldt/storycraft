@@ -183,7 +183,7 @@ const imageLoaderValue = imageLoaderObject.value;
             )}
 
               <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === paragraphs.length && typingEnded ? '' : 'hidden')}>
-                Last Par Component
+                <button>Continue the story</button>
               </div>
 
               <div className={"banner-container " + (bannerShowing && index === currentIndex && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>

@@ -281,6 +281,12 @@ button:disabled {
   transition: font-size 0.3s ease-in-out;
 }
 
+.last-paragrah {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
 .footer {
   width: 100%;
   padding: 24px;

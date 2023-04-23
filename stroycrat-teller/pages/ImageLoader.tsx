@@ -111,7 +111,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
             <button type="button" onClick={handleSendToServer}>
               Transform
             </button>
-            <button type="button" className='btn-secondary' onClick={handleButtonClick}>
+            <button type="button" className='secondary' onClick={handleButtonClick}>
               Reload another Image
             </button>
             </div>

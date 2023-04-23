@@ -21,11 +21,12 @@ h2 {
 /* ------------ BUTTON ----------- */
 
 /* Default state */
+/* Normal state */
 button {
-  background-color: #454545;
+  background: linear-gradient(45deg, #ad00c4, #81009e);
   color: white;
   padding: 8px 16px;
-  border: 1px solid #4d4d4d;
+  border: none;
   border-radius: 200px;
   cursor: pointer;
   line-height: 2rem;
@@ -33,32 +34,57 @@ button {
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-
-
+/* Hover state */
 button:hover {
-  background-color: #5c5c5c;
-  color: #f2f2f2;
-  border-color: #4b4b4b;
+  background: linear-gradient(45deg, #e600ff, #a800c4);
+  color: #ffffff;
+  border-color: #e600ff;
 }
 
-
+/* Active state */
 button:active {
-  background-color: #373737;
-  color: #e5e5e5;
-  border-color: #303030;
+  background: linear-gradient(45deg, #b200d3, #700089);
+  color: #f0f0f0;
+  border-color: #b200d3;
 }
 
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #909090;
-}
-
+/* Disabled state */
 button:disabled {
-  background-color: #7a7a7a;
-  color: #c0c0c0;
-  border-color: #6c6c6c;
+  background: linear-gradient(45deg, #a68fb1, #705c7d);
+  color: #d0d0d0;
   cursor: not-allowed;
+  border-color: #a68fb1;
 }
+
+/* Secondary Button */
+button.secondary {
+  background: linear-gradient(45deg, #232323, #232323);
+  color: #ffffff;
+}
+
+/* Secondary Button Hover state */
+button.secondary:hover {
+  background: linear-gradient(45deg, #5a5a5a, #2d2d2d);
+  color: #ffffff;
+  border-color: #5a5a5a;
+}
+
+/* Secondary Button Active state */
+button.secondary:active {
+  background: linear-gradient(45deg, #1a1a1a, #0d0d0d);
+  color: #f0f0f0;
+  border-color: #1a1a1a;
+}
+
+/* Secondary Button Disabled state */
+button.secondary:disabled {
+  background: linear-gradient(45deg, #a3a3a3, #707070);
+  color: #d0d0d0;
+  cursor: not-allowed;
+  border-color: #a3a3a3;
+}
+
+
 
 .form-container {
   margin: 24px;
@@ -83,9 +109,15 @@ button:disabled {
 }
 
 .form-buttons-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 200px;
+    background: linear-gradient(45deg, #ad00c4, #81009e)
+}
+
+.form-buttons-container button {
+  background: transparent;
 }
 
 .toggle {

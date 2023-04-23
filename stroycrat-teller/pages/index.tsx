@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ParagraphBanner from './ParagraphBanner';
 import CategoryMenu from './CategoryMenu';
 
+
 function App() {
   // Default image URL
   const defaultImageUrl = 'https://static.wixstatic.com/media/845144_90be4482dfb04734b9f11bb7bdbfeefe~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/download__88_-removebg-preview_edited_pn.png';
@@ -20,6 +21,7 @@ function App() {
       const response = await fetch('/categories.json');
       const data = await response.json();
       setCategories(data);
+      console.log(JSON.stringify(data))
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
@@ -50,6 +52,7 @@ function App() {
         imageLoaderTriggerParagraph={selectedCategory.triggerParagraph}
         defaultImageUrl={defaultImageUrl}
         apiEndpoint={apiEndpoint}
+        fetchCategories={fetchCategories}
       />}
     </div>
   );

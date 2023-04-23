@@ -75,7 +75,8 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   const uploadImage = async (file) => {
     try {
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append('image', file)
+      formData.append('id', 'need to add id to here');
 
       const response = await axios.post(apiEndpoint, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

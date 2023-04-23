@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ImageLoader from './ImageLoader';
+import axios from 'axios';
+
 
 
 import { type } from 'os';
@@ -103,6 +105,30 @@ useEffect(() => {
     setFormSubmitted(true)
   };
 
+  const submitForm = async () => {
+    try {
+
+      handleInputSubmission(); // Need to be removed - testing only
+      
+      const response = await axios.post(apiEndpoint, {
+        formSelection,
+        inputValue,
+      });
+  
+      if (response.status === 200) {
+        const updatedParagraphs = response.data.paragraphs;
+        // Replace existing paragraphs with the updated ones
+        props.paragraphs = updatedParagraphs;
+        handleInputSubmission();
+      } else {
+        console.error('Error submitting form:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+  
+
   const handleResponse = () => {
     setShowImageLoader(true);
     setBannerShowing(true)
@@ -162,7 +188,7 @@ const imageLoaderValue = imageLoaderObject.value;
                         onChange={handleInputChange}
                         placeholder="Child's name"
                       />
-                      <button onClick={handleInputSubmission}>Let's start</button>
+                      <button onClick={submitForm}>Let's start</button>
                     </div>
                   </>
                 )}

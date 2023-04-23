@@ -23,7 +23,7 @@ h2 {
 /* Default state */
 /* Normal state */
 button {
-  background: linear-gradient(45deg, #ad00c4, #81009e);
+  background: linear-gradient(45deg, #9800ac, #81009e);
   color: white;
   padding: 8px 16px;
   border: none;
@@ -113,7 +113,7 @@ button.secondary:disabled {
     flex-direction: row;
     width: 100%;
     border-radius: 200px;
-    background: linear-gradient(45deg, #ad00c4, #81009e)
+    background: linear-gradient(45deg, #9800ac, #81009e)
 }
 
 .form-buttons-container button {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ImageLoader from './ImageLoader';
-import axios from 'axios';
 
 
 import { type } from 'os';
@@ -10,9 +9,8 @@ function ParagraphBanner(props: {
     imageLoaderTriggerParagraph: number[];
     defaultImageUrl: string;
     apiEndpoint: string;
-    fetchCategories:any;
   }) {
-  const { paragraphs, imageLoaderTriggerParagraph, defaultImageUrl, apiEndpoint,fetchCategories } = props;
+  const { paragraphs, imageLoaderTriggerParagraph, defaultImageUrl, apiEndpoint } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [bannerShowing, setBannerShowing] = useState(false);
@@ -92,11 +90,6 @@ useEffect(() => {
     }
   };
 
-  const refreshData = () => {
-    fetchCategories()
-    console.log(fetchCategories)
-  }
-
   const handleToggleSelection = (selection) => {
     setFormSelection(selection);
   };
@@ -106,34 +99,13 @@ useEffect(() => {
   };
 
   const handleInputSubmission = () => {
-    sendDataToApi();
     setBannerShowing(true);
-    setFormSubmitted(true);
+    setFormSubmitted(true)
   };
-  
-
-  const sendDataToApi = async () => {
-    try {
-      const response = await axios.post(apiEndpoint, {
-        formSelection,
-        inputValue
-      });
-  
-      const data = response.data;
-      refreshData()
-      console.log('response is ' + response.data)
-      // Process the response data as needed
-    } catch (error) {
-      refreshData()
-      console.error('Error:', formSelection, inputValue, error);
-    }
-  };
-  
 
   const handleResponse = () => {
     setShowImageLoader(true);
     setBannerShowing(true)
-    refreshData()
     // Call your desired function here, e.g. anotherFunction();
   };
 

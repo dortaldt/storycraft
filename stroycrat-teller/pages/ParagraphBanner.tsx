@@ -120,7 +120,7 @@ useEffect(() => {
       if (response.status === 200) {
         const updatedParagraphs = response.data.paragraphs;
         // Replace existing paragraphs with the updated ones
-        currentContent(updatedParagraphs);
+        setCurrentContent(updatedParagraphs);
         handleInputSubmission();
       } else {
         console.error('Error submitting form:', response.status, response.statusText);

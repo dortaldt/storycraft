@@ -56,14 +56,16 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
   const handleSendToServer = async () => {
     if (!uploadedFile) return;
+    setShowProgress(true)
     startProgress()
+    setShowButtonsContainer(false);
   
     try {
       const croppedImageBlob = await cropImage(imageSrc);
       await uploadImage(croppedImageBlob);
       onResponse(); // Call the onResponse callback after the image has been uploaded
       setShowButtonsContainer(false);
-      setShowProgress(true) // Hide the buttons container
+      setShowProgress(false) // Hide the buttons container
     } catch (error) {
       console.error('Error uploading image:', error);
     }

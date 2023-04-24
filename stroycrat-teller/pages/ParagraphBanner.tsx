@@ -12,7 +12,7 @@ function ParagraphBanner(props: {
     defaultImageUrl: string;
     apiEndpoint: string;
   }) {
-  const { paragraphs, imageLoaderTriggerParagraph, defaultImageUrl, apiEndpoint } = props;
+  const { paragraphs, imageLoaderTriggerParagraph, defaultImageUrl, apiEndpoint, selectedCategory } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [bannerShowing, setBannerShowing] = useState(false);
@@ -113,6 +113,7 @@ useEffect(() => {
       const response = await axios.post(apiEndpoint, {
         formSelection,
         inputValue,
+        selectedCategory,
       });
   
       if (response.status === 200) {

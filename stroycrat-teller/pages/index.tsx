@@ -50,6 +50,7 @@ function App() {
         imageLoaderTriggerParagraph={selectedCategory.triggerParagraph}
         defaultImageUrl={defaultImageUrl}
         apiEndpoint={apiEndpoint}
+        selectedCategory={selectedCategory.id}
       />}
     </div>
   );

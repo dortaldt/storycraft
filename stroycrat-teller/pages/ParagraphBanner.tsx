@@ -25,6 +25,7 @@ function ParagraphBanner(props: {
   const [activeImageLoader, setActiveImageLoader] = useState(0)
   const [defaultImage, setDefaultImage] = useState ('')
   const [currentContent, setCurrentContent] = useState(paragraphs)
+  const [loaderTrigger, setLoaderTriggers] = useState(imageLoaderTriggerParagraph)
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -49,7 +50,7 @@ useEffect(() => {
 
         // Handle the image loading trigger
         if (
-          imageLoaderTriggerParagraph.includes(currentIndex + 1) &&
+          loaderTrigger.includes(currentIndex + 1) &&
           newCurrentText === targetText &&
           typingEnded
           ) {
@@ -78,7 +79,7 @@ useEffect(() => {
   currentIndex,
   currentText,
   currentContent,
-  imageLoaderTriggerParagraph,
+  loaderTrigger,
   formSelection,
   inputValue,
   formSubmitted,
@@ -121,6 +122,7 @@ useEffect(() => {
         const updatedParagraphs = response.data.paragraphs;
         // Replace existing paragraphs with the updated ones
         setCurrentContent(updatedParagraphs);
+        setLoaderTriggers(response.data.imageLoaderTriggerParagraph)
         handleInputSubmission();
       } else {
         console.error('Error submitting form:', response.status, response.statusText);
@@ -197,7 +199,7 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
             )}
 
-            {imageLoaderTriggerParagraph.includes(index + 1) && showImageLoader && activeImageLoader >= index - 1 && (
+            {loaderTrigger.includes(index + 1) && showImageLoader && activeImageLoader >= index - 1 && (
               <div className="image-loader-container">
                 <ImageLoader
                   defaultImageUrl={defaultImage}

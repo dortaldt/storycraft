@@ -140,6 +140,27 @@ progress::-moz-progress-bar {
   border-radius: 5px;
 }
 
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  background-color: #1a1a1a;
+  /* border-radius: 5px; */
+}
+
+.progress-bar-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* width: 50%; You can update this value based on your progress value */
+  background: linear-gradient(45deg, #ab00c1, #a200c6);
+  border-radius: 5px;
+}
+
+
 .form-buttons-container button {
   background: transparent;
 }

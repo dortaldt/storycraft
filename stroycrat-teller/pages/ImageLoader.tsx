@@ -1,13 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner, loaderId, selectedCategory }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
+  const [showProgress, setShowProgress] = useState(false)
   const [firstImageUploaded, setFirstImageUploaded] = useState(false);
   const [showButtonsContainer, setShowButtonsContainer] = useState(true);
-
 
   const fileInputRef = useRef(null);
 
@@ -28,7 +29,24 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       }
     };
   };
-  
+
+  const startProgress = () => {
+    if (intervalId) {
+      // If there's already an active interval, don't start another one
+      return;
+    }
+
+    const newIntervalId = setInterval(() => {
+      const randomIncrement = Math.random() * (20 - 10) + 10;
+      setUploadProgress((prevValue) => {
+        const newValue = prevValue + randomIncrement;
+        return newValue > 100 ? 100 : newValue;
+      });
+    }, 1000);
+
+    setIntervalId(newIntervalId);
+  };
+
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -38,12 +56,14 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
   const handleSendToServer = async () => {
     if (!uploadedFile) return;
+    startProgress()
   
     try {
       const croppedImageBlob = await cropImage(imageSrc);
       await uploadImage(croppedImageBlob);
       onResponse(); // Call the onResponse callback after the image has been uploaded
-      setShowButtonsContainer(false); // Hide the buttons container
+      setShowButtonsContainer(false);
+      setShowProgress(true) // Hide the buttons container
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -71,6 +91,12 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   };
   
   
+  const moveBar = () => {
+    const newValue = Math.random()
+    setUploadProgress(newValue)
+  }
+
+  
 
   const uploadImage = async (file) => {
     try {
@@ -91,6 +117,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
       if (response && response.data && response.data.imageUrl) {
         setImageSrc(response.data.imageUrl);
+        setShowProgress(false)
       } else {
         console.error('Invalid API response');
       }
@@ -104,10 +131,12 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
   return (
     <div>
+        <div className={'progbar-container ' + (showProgress ? ' ' : 'transparent')}>
+          <progress className='progress' value={uploadProgress} max="100" />
+        </div>
       <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
       {showButtonsContainer && (
         <div className='buttons-container'>
-
           {firstImageUploaded && (
             <div className='image-loader-buttons'>
             <button type="button" onClick={handleSendToServer}>
@@ -131,12 +160,6 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
             onChange={handleImageUpload}
             style={{ display: 'none' }}
           />
-          
-          {uploadProgress > 0 && (
-            <div>
-              <progress value={uploadProgress} max="100" />
-            </div>
-          )}
           <div className='description-container'>
             {loaderDescription}
           </div>

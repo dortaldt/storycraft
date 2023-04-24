@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner }) => {
+const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner, loaderId }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -76,9 +76,9 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     try {
       const formData = new FormData();
       formData.append('image', file)
-      formData.append('id', 'need to add id to here');
+      formData.append('id', loaderId);
 
-      const response = await axios.post(apiEndpoint, formData, {
+      const response = await axios.post(apiEndpoint + 'img', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round(

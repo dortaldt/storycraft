@@ -24,18 +24,19 @@ function ParagraphBanner(props: {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [activeImageLoader, setActiveImageLoader] = useState(0)
   const [defaultImage, setDefaultImage] = useState ('')
+  const [currentContent, setCurrentContent] = useState(paragraphs)
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
   // Check if the currentIndex is within the paragraphs array
-  if (currentIndex < paragraphs.length) {
+  if (currentIndex < currentContent.length) {
     setTypingEnded(false)
     const interval = setInterval(() => {
-      const currentContent = paragraphs[currentIndex];
+      const currentContentType = currentContent[currentIndex];
 
       // Handle paragraph content type
-      if (currentContent.type === 'paragraph') {
-        const targetText = currentContent.value;
+      if (currentContentType.type === 'paragraph') {
+        const targetText = currentContentType.value;
         const newCurrentText = targetText.slice(0, currentText.length + 1);
         setCurrentText(newCurrentText);
 
@@ -54,7 +55,7 @@ useEffect(() => {
           ) {
             setShowImageLoader(true);
             // Find the imageLoader object with the activeImageLoader id
-            const imageLoaderObject = paragraphs.find(
+            const imageLoaderObject = currentContent.find(
               (content) =>
                 content.type === 'imageLoader' && content.id === activeImageLoader + 1
             );
@@ -76,7 +77,7 @@ useEffect(() => {
 }, [
   currentIndex,
   currentText,
-  paragraphs,
+  currentContent,
   imageLoaderTriggerParagraph,
   formSelection,
   inputValue,
@@ -85,7 +86,7 @@ useEffect(() => {
 
   
   const handleScreenClick = () => {
-    if (bannerShowing && currentIndex < paragraphs.length - 1) {
+    if (bannerShowing && currentIndex < currentContent.length - 1) {
       setCurrentIndex(currentIndex + 1);
       setCurrentText('');
       setBannerShowing(false);
@@ -110,7 +111,7 @@ useEffect(() => {
 
       handleInputSubmission(); // Need to be removed - testing only
       
-      const response = await axios.post(apiEndpoint + '/form', {
+      const response = await axios.post(apiEndpoint + 'form', {
         formSelection,
         inputValue,
         selectedCategory,
@@ -119,7 +120,7 @@ useEffect(() => {
       if (response.status === 200) {
         const updatedParagraphs = response.data.paragraphs;
         // Replace existing paragraphs with the updated ones
-        props.paragraphs = updatedParagraphs;
+        currentContent(updatedParagraphs);
         handleInputSubmission();
       } else {
         console.error('Error submitting form:', response.status, response.statusText);
@@ -152,7 +153,7 @@ useEffect(() => {
   };
 
   // Find the first object with the 'type' value "imageLoader" in the 'paragraphs' prop
-const imageLoaderObject = paragraphs.find(content => content.type === 'imageLoader');
+const imageLoaderObject = currentContent.find(content => content.type === 'imageLoader');
 
 // Access the 'value' key of the found object
 const imageLoaderValue = imageLoaderObject.value;
@@ -160,7 +161,7 @@ const imageLoaderValue = imageLoaderObject.value;
   return (
     <div className="paragraph-banner-container">
       <div className="paragraph-container">
-      {paragraphs
+      {currentContent
         .filter((content) => content.type === 'paragraph')
         .slice(0, currentIndex + 1)
         .map((content, index) => (
@@ -205,11 +206,12 @@ const imageLoaderValue = imageLoaderObject.value;
                   active={showImageLoader}
                   loaderDescription={imageLoaderDescription}
                   turnOffBanner={turnOffBanner}
+                  loaderId={activeImageLoader}
                 />
               </div>
             )}
 
-              <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === paragraphs.length && typingEnded ? '' : 'hidden')}>
+              <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === currentContent.length && typingEnded ? '' : 'hidden')}>
                 <div className='last-para-wrapper'>
                   <a href="https://www.storycraft.ai">
                     <button>Continue the story</button>
@@ -219,7 +221,7 @@ const imageLoaderValue = imageLoaderObject.value;
                 </div>
               </div>
 
-              <div className={"banner-container " + (bannerShowing && index === currentIndex && index + 1 + activeImageLoader !== paragraphs.length && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
+              <div className={"banner-container " + (bannerShowing && index === currentIndex && index + 1 + activeImageLoader !== currentContent.length && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
                 <p className="banner-text">Continue</p> 
               </div>
 

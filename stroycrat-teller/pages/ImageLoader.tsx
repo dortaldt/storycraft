@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner, loaderId }) => {
+const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner, loaderId, selectedCategory }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -77,6 +77,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       const formData = new FormData();
       formData.append('image', file)
       formData.append('id', loaderId);
+      formData.append('selectedCategory', selectedCategory)
 
       const response = await axios.post(apiEndpoint + 'img', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

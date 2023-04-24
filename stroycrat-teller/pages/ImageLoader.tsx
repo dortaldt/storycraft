@@ -90,7 +90,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       });
 
       if (response && response.data && response.data.imageUrl) {
-        setImageSrc('response.data.imageUrl');
+        setImageSrc(response.data.imageUrl);
       } else {
         console.error('Invalid API response');
       }

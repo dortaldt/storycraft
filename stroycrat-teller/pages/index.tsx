@@ -8,7 +8,7 @@ function App() {
   const defaultImageUrl = 'https://static.wixstatic.com/media/845144_90be4482dfb04734b9f11bb7bdbfeefe~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/download__88_-removebg-preview_edited_pn.png';
   
   // API endpoint
-  const apiEndpoint = 'http://149.106.253.25:7860/controlnet_api';
+  const apiEndpoint = 'http://149.106.253.25:7860/';
   
   // State for selected category and categories list
   const [selectedCategory, setSelectedCategory] = useState(null);

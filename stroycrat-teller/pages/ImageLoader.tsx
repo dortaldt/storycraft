@@ -120,6 +120,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       if (response && response.data && response.data.imageUrl) {
         setImageSrc(response.data.imageUrl);
         setShowProgress(false)
+        setUploadProgress(1)
       } else {
         console.error('Invalid API response');
       }

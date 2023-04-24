@@ -42,7 +42,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
         const newValue = prevValue + randomIncrement;
         return newValue > 100 ? 100 : newValue;
       });
-    }, 1000);
+    }, 2000);
 
     setIntervalId(newIntervalId);
   };

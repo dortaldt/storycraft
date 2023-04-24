@@ -110,7 +110,7 @@ useEffect(() => {
 
       handleInputSubmission(); // Need to be removed - testing only
       
-      const response = await axios.post(apiEndpoint, {
+      const response = await axios.post(apiEndpoint + '/form', {
         formSelection,
         inputValue,
         selectedCategory,

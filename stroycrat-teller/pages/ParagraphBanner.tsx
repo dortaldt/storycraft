@@ -120,9 +120,10 @@ useEffect(() => {
   
       if (response.status === 200) {
         const updatedParagraphs = response.data.paragraphs;
+        const updatedTriggers = response.data.imageLoaderTriggerParagraph
         // Replace existing paragraphs with the updated ones
         setCurrentContent(updatedParagraphs);
-        setLoaderTriggers(response.data.imageLoaderTriggerParagraph)
+        setLoaderTriggers(updatedTriggers)
         handleInputSubmission();
       } else {
         console.error('Error submitting form:', response.status, response.statusText);

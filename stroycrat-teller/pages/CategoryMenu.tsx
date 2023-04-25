@@ -44,7 +44,7 @@ const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories
         </div>
       ))}
         <div className={'footer ' + (selectedCategory !== null ? 'hidden' : 'fade')}>
-          <p>Powered by <a href='www.storycarft.ai'>Storycraft AI</a></p>
+          <p>Powered by <a href='https://www.storycraft.ai'>Storycraft AI</a></p>
         </div>
     </div>
   );

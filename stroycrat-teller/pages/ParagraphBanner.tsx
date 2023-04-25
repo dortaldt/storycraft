@@ -199,6 +199,7 @@ const imageLoaderValue = imageLoaderObject.value;
                         value={inputValue}
                         onChange={handleInputChange}
                         placeholder="Child's name"
+                        autoFocus
                       />
                       <button onClick={submitForm} disabled={inputValue === ''}>Let's start</button>
                     </div>

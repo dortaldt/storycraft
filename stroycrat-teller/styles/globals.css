@@ -1,5 +1,22 @@
 .App {
-  /* margin-bottom: 250px; */
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+/* Desktop Styles */
+@media (min-width: 600px) {
+  .category-card.selected img,
+  img {
+    border-radius: 16px;
+  }
+
+  .category-image {
+    border-radius: 0;
+  }
+
+  .paragraph-text {
+    margin: 24px 0 !important;
+  }
 }
 
 body {
@@ -243,7 +260,7 @@ progress::-moz-progress-bar {
 }
 
 .category-card.selected {
-  background-color: red;
+  /* background-color: red; */
   transition: all 0.3s ease-in-out;
 }
 

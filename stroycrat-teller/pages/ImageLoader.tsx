@@ -18,12 +18,10 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = async () => {
+    reader.onloadend = () => {
       const originalImageDataUrl = reader.result;
-      const croppedImageBlob = await cropImage(originalImageDataUrl);
-      const croppedImageDataUrl = URL.createObjectURL(croppedImageBlob);
-      setImageSrc(croppedImageDataUrl);
-      setUploadedFile(croppedImageBlob);
+      setImageSrc(originalImageDataUrl);
+      setUploadedFile(file);
       if (!firstImageUploaded) {
         setFirstImageUploaded(true);
       }
@@ -63,8 +61,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     setShowButtonsContainer(false);
   
     try {
-      const croppedImageBlob = await cropImage(imageSrc);
-      await uploadImage(croppedImageBlob);
+      await uploadImage(uploadedFile);
       onResponse(); // Call the onResponse callback after the image has been uploaded
       setShowButtonsContainer(false);
       setShowProgress(false) // Hide the buttons container
@@ -73,26 +70,26 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     }
   };
 
-  const cropImage = (src) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const croppedSize = 512;
-        canvas.width = croppedSize;
-        canvas.height = croppedSize;
+  // const cropImage = (src) => {
+  //   return new Promise((resolve) => {
+  //     const img = new Image();
+  //     img.src = src;
+  //     img.onload = () => {
+  //       const canvas = document.createElement('canvas');
+  //       const ctx = canvas.getContext('2d');
+  //       const croppedSize = 512;
+  //       canvas.width = croppedSize;
+  //       canvas.height = croppedSize;
   
-        const minDimension = Math.min(img.width, img.height);
-        const startX = (img.width - minDimension) / 2;
-        const startY = (img.height - minDimension) / 2;
+  //       const minDimension = Math.min(img.width, img.height);
+  //       const startX = (img.width - minDimension) / 2;
+  //       const startY = (img.height - minDimension) / 2;
   
-        ctx.drawImage(img, startX, startY, minDimension, minDimension, 0, 0, croppedSize, croppedSize);
-        canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 1);
-      };
-    });
-  };
+  //       ctx.drawImage(img, startX, startY, minDimension, minDimension, 0, 0, croppedSize, croppedSize);
+  //       canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 1);
+  //     };
+  //   });
+  // };
   
   
   const moveBar = () => {

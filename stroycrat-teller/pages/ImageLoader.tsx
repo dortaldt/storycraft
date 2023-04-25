@@ -91,13 +91,6 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   //   });
   // };
   
-  
-  const moveBar = () => {
-    const newValue = Math.random()
-    setUploadProgress(newValue)
-  }
-
-  
 
   const uploadImage = async (file) => {
     try {
@@ -108,12 +101,6 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
       const response = await axios.post(apiEndpoint + 'img', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        // onUploadProgress: (progressEvent) => {
-        //   const percentCompleted = Math.round(
-        //     (progressEvent.loaded * 100) / progressEvent.total
-        //   );
-        //   setUploadProgress(percentCompleted);
-        // },
       });
 
       if (response && response.data && response.data.imageUrl) {

@@ -36,13 +36,15 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       return;
     }
 
+    // Controls the loader behaviour 
+
     const newIntervalId = setInterval(() => {
-      const randomIncrement = Math.random() * (20 - 10) + 10;
+      const randomIncrement = Math.random() * (10 - 5) + 10;
       setUploadProgress((prevValue) => {
         const newValue = prevValue + randomIncrement;
         return newValue > 100 ? 100 : newValue;
       });
-    }, 2000);
+    }, 1000);
 
     setIntervalId(newIntervalId);
   };

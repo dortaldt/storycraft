@@ -80,15 +80,23 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       img.onload = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        const croppedSize = 512;
-        canvas.width = croppedSize;
-        canvas.height = croppedSize;
+        const maxSize = 1024;
+        let newWidth, newHeight;
   
-        const minDimension = Math.min(img.width, img.height);
-        const startX = (img.width - minDimension) / 2;
-        const startY = (img.height - minDimension) / 2;
+        if (img.width > img.height) {
+          // Landscape
+          newWidth = maxSize;
+          newHeight = Math.round((img.height * maxSize) / img.width);
+        } else {
+          // Portrait
+          newWidth = Math.round((img.width * maxSize) / img.height);
+          newHeight = maxSize;
+        }
   
-        ctx.drawImage(img, startX, startY, minDimension, minDimension, 0, 0, croppedSize, croppedSize);
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+  
+        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, newWidth, newHeight);
         canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 1);
       };
     });

@@ -26,6 +26,7 @@ function ParagraphBanner(props: {
   const [defaultImage, setDefaultImage] = useState ('')
   const [currentContent, setCurrentContent] = useState(paragraphs)
   const [loaderTrigger, setLoaderTriggers] = useState(imageLoaderTriggerParagraph)
+  const [bannerText, setBannerText] = useState('Continue')
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -46,6 +47,7 @@ useEffect(() => {
           setBannerShowing(true);
           setTypingEnded(true)
           clearInterval(interval);
+          setBannerText('Continue')
         }
 
         // Handle the image loading trigger
@@ -55,6 +57,7 @@ useEffect(() => {
           typingEnded
           ) {
             setShowImageLoader(true);
+            setBannerText('Skip')
             // Find the imageLoader object with the activeImageLoader id
             const imageLoaderObject = currentContent.find(
               (content) =>
@@ -124,9 +127,11 @@ useEffect(() => {
         // Replace existing paragraphs with the updated ones
         setCurrentContent(updatedParagraphs);
         setLoaderTriggers(updatedTriggers)
+        setBannerText('Continue')
         handleInputSubmission();
       } else {
         console.error('Error submitting form:', response.status, response.statusText);
+        setBannerText('Continue')
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -137,6 +142,7 @@ useEffect(() => {
   const handleResponse = () => {
     setShowImageLoader(true);
     setBannerShowing(true)
+    setBannerText('Continue')
     // Call your desired function here, e.g. anotherFunction();
   };
 
@@ -226,7 +232,7 @@ const imageLoaderValue = imageLoaderObject.value;
               </div>
 
               <div className={"banner-container " + (bannerShowing && index === currentIndex && index + 1 + activeImageLoader !== currentContent.length && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
-                <p className="banner-text">Continue</p> 
+                <p className="banner-text">{bannerText}</p> 
               </div>
 
           </div>

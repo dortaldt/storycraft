@@ -174,7 +174,7 @@ progress::-moz-progress-bar {
   height: 100%;
   /* width: 50%; You can update this value based on your progress value */
   background: linear-gradient(45deg, #ab00c1, #a200c6);
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 

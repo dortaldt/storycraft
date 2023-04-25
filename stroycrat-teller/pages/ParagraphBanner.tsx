@@ -200,7 +200,7 @@ const imageLoaderValue = imageLoaderObject.value;
                         onChange={handleInputChange}
                         placeholder="Child's name"
                       />
-                      <button onClick={submitForm}>Let's start</button>
+                      <button onClick={submitForm} disabled={inputValue === ''}>Let's start</button>
                     </div>
                   </>
                 )}

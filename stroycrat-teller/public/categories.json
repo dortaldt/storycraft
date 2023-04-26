@@ -2,7 +2,7 @@
     {
       "id": 1,
       "title": "Courage",
-      "description": "Encourge your child to face their fears, teach them coping startgies and show them how to take caclulated risks to cuild condidence",
+      "description": "Brave child and enchanted toy journey through magic, unlocking limitless possibilities.",
       "image": "https://static.wixstatic.com/media/30d7ff_cbd8579a39f04e23bf2f3982449f0ba5~mv2.png",
       "triggerParagraph": [2,4],
       "content": [
@@ -37,13 +37,13 @@
     {
       "id": 2,
       "title": "Curiosity",
-      "description": "This is a short description of category 2",
+      "description": "Child's space adventure shows endless possibilities within themselves and universe.",
       "image": "https://static.wixstatic.com/media/30d7ff_76163fb8037a4f5c87bfc306d5a10b93~mv2.png",
       "triggerParagraph": [3],
       "content": [
         {
            "type": "paragraph",
-            "value": "Paragraph 1 for Category 2" 
+            "value": "One day, a little" 
           },
         {
            "type": "paragraph",

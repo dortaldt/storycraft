@@ -124,6 +124,11 @@ button.secondary:disabled {
   border-color: #a3a3a3;
 }
 
+.text-field:focus {
+  border: 1px solid #9100a9;
+  outline: none;
+}
+
 
 
 .form-container {

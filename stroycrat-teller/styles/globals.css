@@ -323,7 +323,7 @@ progress::-moz-progress-bar {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .transparent {
@@ -430,11 +430,19 @@ progress::-moz-progress-bar {
 
 
 .footer {
+  font-size: 0.8rem;
   width: 100%;
   padding: 24px;
+  display: flex;
+  justify-content: space-between;
   color: grey;
 }
 
 a {
   color: #ff1bf4 ;
+  text-decoration: none;
+}
+
+.secondary-link a {
+  color: grey;
 }

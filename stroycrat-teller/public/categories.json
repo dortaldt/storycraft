@@ -57,6 +57,10 @@
             "type": "paragraph", 
             "value": "Paragraph 4 for Category 2" 
            },
+           {
+            "type": "paragraph", 
+            "value": "Paragraph 5 for Category 2" 
+           },
         {
            "type": "imageLoader",
            "default_image": "https://cdn.dribbble.com/users/33073/screenshots/14976792/media/03de033c310a7e9508bdb8664ea24a3b.png?compress=1&resize=1600x1200&vertical=top", 

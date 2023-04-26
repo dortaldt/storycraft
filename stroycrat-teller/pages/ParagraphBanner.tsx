@@ -178,7 +178,7 @@ const imageLoaderValue = imageLoaderObject.value;
           <div className="paragraph" key={index}>
             <p
               className="paragraph-text"
-              style={{ opacity: index === currentIndex ? 1 : 0.5 }}
+              style={{ opacity: currentIndex + activeImageLoader === currentContent.length - 1 && typingEnded || index === currentIndex ? 1 : 0.5 }}
               dangerouslySetInnerHTML={createMarkup(index === currentIndex ? currentText : content.value, index)}
             />
             {index === 0 && currentText.length === content.value.length && !formSubmitted &&(

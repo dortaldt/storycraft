@@ -24,6 +24,8 @@ export default function Document() {
         <meta name="twitter:title" content="StoryCraft AI"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
 
+        <title>StoryCraft AI - Experience</title>
+
       </Head>
       <body>
         <Main />

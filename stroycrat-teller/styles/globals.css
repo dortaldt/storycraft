@@ -218,6 +218,7 @@ progress::-moz-progress-bar {
 .toggle-left {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  border-right: 1px solid #660075;
 }
 
 .toggle-right {

@@ -30,23 +30,37 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     };
   };
 
+  let firstInterval = true;
+  const getRandomInterval = () => {
+    if (firstInterval) {
+      firstInterval = false;
+      return 0;
+    }
+    return Math.random() * (3000 - 0) + 500;
+  };
+  
   const startProgress = () => {
     if (intervalId) {
       // If there's already an active interval, don't start another one
       return;
     }
-
-    // Controls the loader behaviour 
-
-    const newIntervalId = setInterval(() => {
-      const randomIncrement = Math.random() * (10 - 5) + 10;
-      setUploadProgress((prevValue) => {
-        const newValue = prevValue + randomIncrement;
-        return newValue > 100 ? 100 : newValue;
-      });
-    }, 1000);
-
-    setIntervalId(newIntervalId);
+  
+    // Controls the loader behaviour
+    const startNewInterval = () => {
+      const newIntervalId = setInterval(() => {
+        const randomIncrement = Math.random() * (10 - 5) + 10;
+        setUploadProgress((prevValue) => {
+          const newValue = prevValue + randomIncrement;
+          return newValue > 100 ? 100 : newValue;
+        });
+        clearInterval(newIntervalId);
+        startNewInterval();
+      }, getRandomInterval());
+  
+      setIntervalId(newIntervalId);
+    };
+  
+    startNewInterval();
   };
 
 

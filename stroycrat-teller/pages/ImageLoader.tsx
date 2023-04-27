@@ -48,7 +48,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     // Controls the loader behaviour
     const startNewInterval = () => {
       const newIntervalId = setInterval(() => {
-        const randomIncrement = Math.random() * (10 - 5) + 10;
+        const randomIncrement = Math.random() * (5 - 0) + 10;
         setUploadProgress((prevValue) => {
           const newValue = prevValue + randomIncrement;
           return newValue > 100 ? 100 : newValue;

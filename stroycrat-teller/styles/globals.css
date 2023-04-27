@@ -186,6 +186,11 @@ progress::-moz-progress-bar {
   border-radius: 5px;
 }
 
+.img-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .progress-bar {
   width: 100%;
   height: 8px;

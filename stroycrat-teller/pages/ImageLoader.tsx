@@ -9,7 +9,20 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   const [showProgress, setShowProgress] = useState(false)
   const [firstImageUploaded, setFirstImageUploaded] = useState(false);
   const [showButtonsContainer, setShowButtonsContainer] = useState(true);
+  const [originalImageDataUrl, setOriginalImageDataUrl] = useState(null);
+  const [transformButtonText, setTransformButtonText] = useState("Transform");
+  const [isRegenerate, setIsRegenerate] = useState(false);
+  const [firstTransformRequest, setFirstTransformRequest] = useState(false);
 
+
+  const updateTransformButton = () => {
+    if (isRegenerate) {
+      setTransformButtonText("Regenerate");
+    } else {
+      setTransformButtonText("Transform");
+    }
+  };
+  
   const fileInputRef = useRef(null);
 
   const handleImageUpload = async (e) => {
@@ -20,15 +33,19 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     reader.readAsDataURL(file);
     reader.onloadend = async () => {
       const originalImageDataUrl = reader.result;
+      setOriginalImageDataUrl(originalImageDataUrl);
       const croppedImageBlob = await cropImage(originalImageDataUrl);
       const croppedImageDataUrl = URL.createObjectURL(croppedImageBlob);
       setImageSrc(croppedImageDataUrl);
       setUploadedFile(croppedImageBlob);
       if (!firstImageUploaded) {
         setFirstImageUploaded(true);
+        setIsRegenerate(true); // Set isRegenerate to true after the first image is uploaded
+        updateTransformButton(); // Update the transform button text and class
       }
     };
   };
+  
 
   let firstInterval = true;
   const getRandomInterval = () => {
@@ -71,21 +88,25 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   };
 
   const handleSendToServer = async () => {
-    if (!uploadedFile) return;
-    setShowProgress(true)
-    startProgress()
-    setShowButtonsContainer(false);
-  
+    if (!originalImageDataUrl) return;
+    setShowProgress(true);
+    startProgress();
+    
     try {
-      const croppedImageBlob = await cropImage(imageSrc);
+      const croppedImageBlob = await cropImage(originalImageDataUrl);
       await uploadImage(croppedImageBlob);
       onResponse(); // Call the onResponse callback after the image has been uploaded
-      setShowButtonsContainer(false);
-      setShowProgress(false) // Hide the buttons container
+      setIsRegenerate(true);
+      updateTransformButton();
+      if (!firstTransformRequest) {
+        setFirstTransformRequest(true);
+      }
+      setShowProgress(false); // Hide the buttons container
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
+  
 
   const cropImage = (src) => {
     return new Promise((resolve) => {
@@ -155,12 +176,19 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
         <div className='buttons-container'>
           {firstImageUploaded && (
             <div className='image-loader-buttons'>
-            <button type="button"  disabled={showProgress} onClick={handleSendToServer}>
-              Transform
+            <button 
+              type="button"
+              className={isRegenerate ? 'secondary' : ''}
+              disabled={showProgress} 
+              onClick={handleSendToServer}
+              >
+              {transformButtonText}
             </button>
-            <button type="button" className='secondary' disabled={showProgress} onClick={handleButtonClick}>
-              Reload another Image
-            </button>
+            {!firstTransformRequest && (
+              <button type="button" className='secondary' disabled={showProgress} onClick={handleButtonClick}>
+                Reload another Image
+              </button>
+            )}
             </div>
           )}
           {!firstImageUploaded && (
@@ -182,7 +210,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
         </div>
       )}
     </div>
-  );
+  );  
 };
 
 export default ImageLoader;

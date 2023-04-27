@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
-const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner, loaderId, selectedCategory }) => {
+const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescription, turnOffBanner, loaderId, selectedCategory, handleScreenClick }) => {
   const [imageSrc, setImageSrc] = useState(defaultImageUrl);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -22,6 +22,12 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       setTransformButtonText("Transform");
     }
   };
+
+  const handleContinue = () => {
+    setShowButtonsContainer(false);
+    handleScreenClick()
+  };
+  
   
   const fileInputRef = useRef(null);
 
@@ -176,9 +182,14 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
         <div className='buttons-container'>
           {firstImageUploaded && (
             <div className='image-loader-buttons'>
+              {firstTransformRequest && (
+                <button type="button" className='continue' onClick={handleContinue}>
+                  Continue
+                </button>
+              )}
             <button 
               type="button"
-              className={isRegenerate ? 'secondary' : ''}
+              className={transformButtonText === "Transform" ? '' : 'secondary'}
               disabled={showProgress} 
               onClick={handleSendToServer}
               >

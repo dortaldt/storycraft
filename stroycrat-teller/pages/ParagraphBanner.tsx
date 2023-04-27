@@ -219,6 +219,7 @@ const imageLoaderValue = imageLoaderObject.value;
                   turnOffBanner={turnOffBanner}
                   loaderId={activeImageLoader}
                   selectedCategory={selectedCategory}
+                  handleScreenClick={handleScreenClick}
                 />
               </div>
             )}

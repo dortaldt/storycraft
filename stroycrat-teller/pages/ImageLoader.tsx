@@ -145,13 +145,14 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
   return (
     <div>
-        <div className={"progress-bar " + 'progbar-container ' + (showProgress ? ' ' : 'transparent') }>
-          <div className="progress-bar-inner" id="progress-bar-inner" style={{width: uploadProgress+ '%'}}></div>
-        </div>
+        
         {/* <div className={'progbar-container ' + (showProgress ? ' ' : 'transparent')}>
           <progress className='progress' value={uploadProgress} max="100" />
         </div> */}
       <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
+      <div className={"progress-bar " + 'progbar-container ' + (showProgress ? ' ' : 'transparent') }>
+          <div className="progress-bar-inner" id="progress-bar-inner" style={{width: uploadProgress+ '%'}}></div>
+        </div>
       {showButtonsContainer && (
         <div className='buttons-container'>
           {firstImageUploaded && (

@@ -38,6 +38,16 @@ h2 {
   transition: all 0.3 ease-in-out;
 }
 
+.paragraph {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  width: 50%;
+  margin: auto;
+}
+
 /* ------------ BUTTON ----------- */
 
 /* Default state */
@@ -238,6 +248,8 @@ progress::-moz-progress-bar {
   padding: 24px;
   gap: 24px;
 }
+
+
 
 .paragraph-banner-container {
   /* margin: 24px; */

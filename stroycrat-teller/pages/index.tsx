@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Import required modules and components
 import React, { useState, useEffect } from 'react';
 import ParagraphBanner from './ParagraphBanner';

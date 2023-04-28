@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 
 const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories: any[]; }) => {

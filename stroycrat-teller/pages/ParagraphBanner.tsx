@@ -202,7 +202,7 @@ const imageLoaderValue = imageLoaderObject.value;
                         placeholder="Child's name"
                         autoFocus
                       />
-                      <button onClick={submitForm} disabled={inputValue === ''}>Let's start</button>
+                      <button onClick={submitForm} disabled={inputValue === ''}>Let&apos;s start</button>
                     </div>
                   </>
                 )}
@@ -230,7 +230,7 @@ const imageLoaderValue = imageLoaderObject.value;
                   <a href="https://www.storycraft.ai">
                     <button>Continue the story</button>
                   </a>
-                  <div className='description-container'>If you're interested in reading about Jonathan’s full journey as he conquers his fears, we have personalized books you should check out. Where your child is the star of their story.Follow the link to discover more and order your very own copy of גםר's exciting adventure!
+                  <div className='description-container'>If you&apos;re interested in reading about
                   </div>
                 </div>
               </div>

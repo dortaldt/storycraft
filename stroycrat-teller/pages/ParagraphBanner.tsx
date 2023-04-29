@@ -235,9 +235,9 @@ const imageLoaderValue = imageLoaderObject.value;
                 </div>
               </div>
 
-              <button className={"secondary banner " + (bannerShowing && index === currentIndex && index + 1 + activeImageLoader !== currentContent.length && formSubmitted ? '' : 'hidden') }  onClick={handleScreenClick}>
-                {bannerText}  
-              </button>
+              <div className={"height-trans" + (bannerShowing && index === currentIndex && index + 1 + activeImageLoader !== currentContent.length && formSubmitted ? '' : ' hide') }  onClick={handleScreenClick}>
+                <button className='secondary'>{bannerText}</button>
+              </div>
 
           </div>
         ))}

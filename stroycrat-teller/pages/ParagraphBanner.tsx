@@ -254,17 +254,17 @@ const imageLoaderValue = imageLoaderObject.value;
                   <a href="https://www.storycraft.ai">
                     <button>Continue the story</button>
                   </a>
-                  <div>
-                    {gifsUrl.map((url, index) => (
-                      <button
-                        className='secondary'
-                        key={index}
-                        onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
-                      >
-                        Download gif {index + 1}
-                      </button>
-                    ))}
-                  </div>
+                  
+                  {gifsUrl.map((url, index) => (
+                    <button
+                      className='secondary'
+                      key={index}
+                      onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
+                    >
+                      Download gif {index + 1}
+                    </button>
+                  ))}
+                  
                   <div className='description-container'>If you&apos;re interested in reading about
                   </div>
                 </div>

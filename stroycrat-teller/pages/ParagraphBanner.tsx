@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ImageLoader from './ImageLoader';
 import axios from 'axios';
 
@@ -28,6 +28,7 @@ function ParagraphBanner(props: {
   const [currentContent, setCurrentContent] = useState(paragraphs)
   const [loaderTrigger, setLoaderTriggers] = useState(imageLoaderTriggerParagraph)
   const [bannerText, setBannerText] = useState('Continue')
+  const [gifsUrl, setGifsUrl] = useState([])
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -98,6 +99,27 @@ useEffect(() => {
     }
   };
 
+  const downloadFile = async (url, filename) => {
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const blob = await response.blob();
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = filename;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      } else {
+        console.error('Error downloading the file:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error downloading the file:', error);
+    }
+  };
+  
+  
+
   const handleToggleSelection = (selection) => {
     setFormSelection(selection);
   };
@@ -141,10 +163,12 @@ useEffect(() => {
   };
   
 
-  const handleResponse = () => {
+  const handleResponse = (gifUrl) => {
     setShowImageLoader(true);
     setBannerShowing(true)
     setBannerText('Continue')
+    setGifsUrl((gifsUrl) => [...gifsUrl, gifUrl]);
+    console.log(gifsUrl)
     // Call your desired function here, e.g. anotherFunction();
   };
 
@@ -230,6 +254,17 @@ const imageLoaderValue = imageLoaderObject.value;
                   <a href="https://www.storycraft.ai">
                     <button>Continue the story</button>
                   </a>
+                  <div>
+                    {gifsUrl.map((url, index) => (
+                      <button
+                        className='secondary'
+                        key={index}
+                        onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
+                      >
+                        Download gif {index + 1}
+                      </button>
+                    ))}
+                  </div>
                   <div className='description-container'>If you&apos;re interested in reading about
                   </div>
                 </div>

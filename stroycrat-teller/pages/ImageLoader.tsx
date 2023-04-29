@@ -102,7 +102,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     try {
       const croppedImageBlob = await cropImage(originalImageDataUrl);
       await uploadImage(croppedImageBlob);
-      onResponse(); // Call the onResponse callback after the image has been uploaded
+      // onResponse(imageSrc); // Call the onResponse callback after the image has been uploaded
       setIsRegenerate(true);
       updateTransformButton();
       if (!firstTransformRequest) {
@@ -158,6 +158,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
       if (response && response.data && response.data.imageUrl) {
         setImageSrc(response.data.imageUrl);
+        onResponse(response.data.imageUrl)
         setShowProgress(false)
         setUploadProgress(1)
       } else {

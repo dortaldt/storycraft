@@ -255,22 +255,31 @@ const imageLoaderValue = imageLoaderObject.value;
 
               <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === currentContent.length && typingEnded ? '' : 'hidden')}>
                 <div className='last-para-wrapper'>
-                  <a href="https://www.storycraft.ai">
-                    <button>Continue the story</button>
-                  </a>
+                  <div className='gif-buttons-container'>
+                    <a href="https://www.storycraft.ai">
+                      <button>Continue the story</button>
+                    </a>
+                    <p className='description-container explaination'>If you&apos;re interested in reading about
+                    </p>
+                  </div>
                   
                   {gifsUrl.map((url, index) => (
-                    <button
-                      className='secondary'
-                      key={index}
-                      onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
-                    >
-                      Download gif {index + 1} id is {downloadLabels[index]}
-                    </button>
+                    <div className='gif-buttons-container' key={index}>
+                      <button
+                        className='secondary'
+                        key={index}
+                        onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
+                      >
+                        Download gif {index + 1} id is {downloadLabels[index]}
+                      </button>
+                      <div className='explaination'>
+                        <p>You can find your gifs:</p>
+                        <p>iOS: Files &gt; Browse &gt; On My Device &gt; Downloads.</p>
+                        <p>Android: Files &gt; Downloads &gt; File.</p>
+                      </div>
+                    </div>
                   ))}
-                  
-                  <div className='description-container'>If you&apos;re interested in reading about
-                  </div>
+            
                 </div>
               </div>
 

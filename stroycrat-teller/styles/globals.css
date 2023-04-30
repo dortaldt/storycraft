@@ -309,9 +309,15 @@ progress::-moz-progress-bar {
   flex-direction: column;
   color: #bdbdbd;
   font-size: 0.8rem;
-  line-height: 0;
+  /* line-height: 0; */
   height: fit-content;
+  gap: 0.5rem;
 }
+
+.explaination p {
+  margin-bottom: 0;
+}
+
 
 
 .category-menu {

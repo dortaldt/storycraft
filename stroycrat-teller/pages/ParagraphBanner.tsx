@@ -100,8 +100,9 @@ useEffect(() => {
   };
 
   const downloadFile = async (url, filename) => {
+    const gifUrl = url.replace(/\.(jpg|png|jpeg)$/, '.gif');
     try {
-      const response = await fetch(url);
+      const response = await fetch(gifUrl);
       if (response.ok) {
         const blob = await response.blob();
         const downloadLink = document.createElement('a');
@@ -117,6 +118,7 @@ useEffect(() => {
       console.error('Error downloading the file:', error);
     }
   };
+  
   
   
 

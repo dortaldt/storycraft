@@ -29,6 +29,7 @@ function ParagraphBanner(props: {
   const [loaderTrigger, setLoaderTriggers] = useState(imageLoaderTriggerParagraph)
   const [bannerText, setBannerText] = useState('Continue')
   const [gifsUrl, setGifsUrl] = useState([])
+  const [downloadLabels, setDownloadLabels] = useState([])
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -67,6 +68,7 @@ useEffect(() => {
             );
             // Update the imageLoaderDescription state with the value of the found object
             setImageLoaderDescription(imageLoaderObject.value)
+            setDownloadLabels((downloadLabels) => [...downloadLabels, imageLoaderObject.downloadLabel]); // Need to change this to the label from the json
             setDefaultImage(imageLoaderObject.default_image);
             setActiveImageLoader(activeImageLoader + 1)
           }
@@ -263,7 +265,7 @@ const imageLoaderValue = imageLoaderObject.value;
                       key={index}
                       onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
                     >
-                      Download gif {index + 1}
+                      Download gif {index + 1} id is {downloadLabels[index]}
                     </button>
                   ))}
                   

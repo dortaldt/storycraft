@@ -77,7 +77,7 @@ useEffect(() => {
       else if (currentContent.type === 'imageLoader') {
         // Add functionality for handling imageLoader content type here
       }
-    }, 10);
+    }, 2);
 
     // Cleanup function to clear the interval when the effect is no longer needed
     return () => clearInterval(interval);
@@ -167,10 +167,13 @@ useEffect(() => {
   };
   
 
-  const handleResponse = (gifUrl) => {
+  const handleResponse = (gifUrl, isRegenerate) => {
     setShowImageLoader(true);
     setBannerShowing(true)
     setBannerText('Continue')
+    if (isRegenerate) {
+      setGifsUrl((gifsUrl) => gifsUrl.slice(0, -1));
+    } 
     setGifsUrl((gifsUrl) => [...gifsUrl, gifUrl]);
     console.log(gifsUrl)
     // Call your desired function here, e.g. anotherFunction();

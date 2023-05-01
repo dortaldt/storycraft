@@ -270,15 +270,17 @@ const imageLoaderValue = imageLoaderObject.value;
                         key={index}
                         onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
                       >
-                        Download gif {index + 1} id is {downloadLabels[index]}
+                        Download {downloadLabels[index]}
                       </button>
-                      <div className='explaination'>
+                    </div>
+                  ))}
+                  {gifsUrl.length > 0 && (
+                  <div className='explaination'>
                         <p>You can find your gifs:</p>
                         <p>iOS: Files &gt; Browse &gt; On My Device &gt; Downloads.</p>
                         <p>Android: Files &gt; Downloads &gt; File.</p>
                       </div>
-                    </div>
-                  ))}
+                  )}
             
                 </div>
               </div>

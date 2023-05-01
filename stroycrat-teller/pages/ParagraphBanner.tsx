@@ -259,7 +259,7 @@ const imageLoaderValue = imageLoaderObject.value;
                     <a href="https://www.storycraft.ai">
                       <button>Continue the story</button>
                     </a>
-                    <p className='description-container explaination'>If you&apos;re interested in reading about
+                    <p className='description-container explaination'>Want to see your child as the main character of the story? We have personalized books where your child is the star of their adventure!
                     </p>
                   </div>
                   

@@ -14,7 +14,8 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   const [transformButtonText, setTransformButtonText] = useState("Transform");
   const [isRegenerate, setIsRegenerate] = useState(false);
   const [firstTransformRequest, setFirstTransformRequest] = useState(false);
-
+  const [loaderBackgroundImg, setLoaderBackgroundImg] = useState('')
+  const [fadeStatus, setFadeStatus] = useState(false)
 
   const updateTransformButton = () => {
     if (isRegenerate) {
@@ -98,6 +99,8 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     if (!originalImageDataUrl) return;
     setShowProgress(true);
     startProgress();
+    setLoaderBackgroundImg(imageSrc)
+    setFadeStatus(false)
     
     try {
       const croppedImageBlob = await cropImage(originalImageDataUrl);
@@ -159,6 +162,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       if (response && response.data && response.data.imageUrl) {
         setImageSrc(response.data.imageUrl);
         setShowProgress(false)
+        setFadeStatus(true)
         setUploadProgress(1)
       } else {
         console.error('Invalid API response');
@@ -173,8 +177,10 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
   return (
     <div>
-      <div className='img-container'>
-        <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
+      <div className='img-container' style={{backgroundImage: `url(${loaderBackgroundImg})`}}>
+        <div className={'img-wrapper ' + (fadeStatus ? 'fade-before' : '')}>
+          <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
+        </div>
         <div className={"progress-bar " + 'progbar-container ' + (showProgress ? ' ' : 'transparent') }>
             <div className="progress-bar-inner" id="progress-bar-inner" style={{width: uploadProgress+ '%'}}></div>
         </div>

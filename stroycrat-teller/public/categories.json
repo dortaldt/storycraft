@@ -2,7 +2,7 @@
     {
       "id": 1,
       "title": "Courage",
-      "description": "Brave child and enchanted toy journey through magic, unlocking limitless possibilities.",
+      "description": "A brave child and an enchanted toy journey through magic, unlocking limitless possibilities.",
       "image": "https://static.wixstatic.com/media/30d7ff_cbd8579a39f04e23bf2f3982449f0ba5~mv2.png",
       "triggerParagraph": [2,4],
       "content": [
@@ -37,13 +37,13 @@
     {
       "id": 2,
       "title": "Perseverance",
-      "description": "Child's space adventure shows endless possibilities within themselves and universe.",
+      "description": "A child's space adventure shows endless possibilities within themselves and the universe.",
       "image": "https://static.wixstatic.com/media/30d7ff_76163fb8037a4f5c87bfc306d5a10b93~mv2.png",
       "triggerParagraph": [3],
       "content": [
         {
            "type": "paragraph",
-            "value": "One day, a little" 
+            "value": "One day, not long ago, there was a little" 
           },
         {
            "type": "paragraph",

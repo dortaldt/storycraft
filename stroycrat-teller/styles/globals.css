@@ -217,12 +217,12 @@ progress::-moz-progress-bar {
 }
 
 .img-wrapper.fade-before {
-  opacity:1;
+  opacity:0;
   transition: all 1s ease-in-out;
 }
 
 .img-wrapper {
-  opacity: 0;
+  opacity: 1;
   transition: all 1s ease-in-out;
 }
 

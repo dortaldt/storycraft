@@ -46,6 +46,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       const croppedImageBlob = await cropImage(originalImageDataUrl);
       const croppedImageDataUrl = URL.createObjectURL(croppedImageBlob);
       setImageSrc(croppedImageDataUrl);
+      setLoaderBackgroundImg(croppedImageDataUrl)
       setUploadedFile(croppedImageBlob);
       if (!firstImageUploaded) {
         setFirstImageUploaded(true);
@@ -191,7 +192,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   return (
     <div>
       <div className='img-container' style={{backgroundImage: `url(${loaderBackgroundImg})`}}>
-        <div className={'img-wrapper ' + (fadeStatus ? 'fade-before' : '')}>
+        <div className={'img-wrapper ' + (fadeStatus ? ' ' : 'fade-before')}>
           <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%' }} />
         </div>
         <div className={"progress-bar " + 'progbar-container ' + (showProgress ? ' ' : 'transparent') }>

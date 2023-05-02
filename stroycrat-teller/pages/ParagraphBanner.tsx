@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ImageLoader from './ImageLoader';
 import axios from 'axios';
 
@@ -28,6 +28,8 @@ function ParagraphBanner(props: {
   const [currentContent, setCurrentContent] = useState(paragraphs)
   const [loaderTrigger, setLoaderTriggers] = useState(imageLoaderTriggerParagraph)
   const [bannerText, setBannerText] = useState('Continue')
+  const [gifsUrl, setGifsUrl] = useState([])
+  const [downloadLabels, setDownloadLabels] = useState([])
 
   // This effect is responsible for updating the current text and handling image loading
 useEffect(() => {
@@ -66,6 +68,7 @@ useEffect(() => {
             );
             // Update the imageLoaderDescription state with the value of the found object
             setImageLoaderDescription(imageLoaderObject.value)
+            setDownloadLabels((downloadLabels) => [...downloadLabels, imageLoaderObject.downloadLabel]); // Need to change this to the label from the json
             setDefaultImage(imageLoaderObject.default_image);
             setActiveImageLoader(activeImageLoader + 1)
           }
@@ -74,7 +77,7 @@ useEffect(() => {
       else if (currentContent.type === 'imageLoader') {
         // Add functionality for handling imageLoader content type here
       }
-    }, 10);
+    }, 2);
 
     // Cleanup function to clear the interval when the effect is no longer needed
     return () => clearInterval(interval);
@@ -97,6 +100,29 @@ useEffect(() => {
       setBannerShowing(false);
     }
   };
+
+  const downloadFile = async (url, filename) => {
+    const gifUrl = url.replace(/\.(jpg|png|jpeg)$/, '.gif');
+    try {
+      const response = await fetch(gifUrl);
+      if (response.ok) {
+        const blob = await response.blob();
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = filename;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      } else {
+        console.error('Error downloading the file:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error downloading the file:', error);
+    }
+  };
+  
+  
+  
 
   const handleToggleSelection = (selection) => {
     setFormSelection(selection);
@@ -141,10 +167,15 @@ useEffect(() => {
   };
   
 
-  const handleResponse = () => {
+  const handleResponse = (gifUrl, isRegenerate) => {
     setShowImageLoader(true);
     setBannerShowing(true)
     setBannerText('Continue')
+    if (isRegenerate) {
+      setGifsUrl((gifsUrl) => gifsUrl.slice(0, -1));
+    } 
+    setGifsUrl((gifsUrl) => [...gifsUrl, gifUrl]);
+    console.log(gifsUrl)
     // Call your desired function here, e.g. anotherFunction();
   };
 
@@ -227,11 +258,33 @@ const imageLoaderValue = imageLoaderObject.value;
 
               <div className={'last-paragrah ' + ((index + 1 + activeImageLoader) === currentContent.length && typingEnded ? '' : 'hidden')}>
                 <div className='last-para-wrapper'>
-                  <a href="https://www.storycraft.ai">
-                    <button>Continue the story</button>
-                  </a>
-                  <div className='description-container'>If you&apos;re interested in reading about
+                  <div className='gif-buttons-container'>
+                    <a href="https://www.storycraft.ai">
+                      <button>Continue the story</button>
+                    </a>
+                    <p className='description-container explaination'>Want to see your child as the main character of the story? We have personalized books where your child is the star of their adventure!
+                    </p>
                   </div>
+                  
+                  {gifsUrl.map((url, index) => (
+                    <div className='gif-buttons-container' key={index}>
+                      <button
+                        className='secondary'
+                        key={index}
+                        onClick={() => downloadFile(url, `gif${index + 1}.gif`)}
+                      >
+                        Download {downloadLabels[index]}
+                      </button>
+                    </div>
+                  ))}
+                  {gifsUrl.length > 0 && (
+                  <div className='explaination'>
+                        <p>You can find your gifs:</p>
+                        <p>iOS: Files &gt; Browse &gt; On My Device &gt; Downloads.</p>
+                        <p>Android: Files &gt; Downloads &gt; File.</p>
+                      </div>
+                  )}
+            
                 </div>
               </div>
 

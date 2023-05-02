@@ -18,6 +18,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
   const [fadeStatus, setFadeStatus] = useState(false)
 
   const updateTransformButton = () => {
+    
     if (isRegenerate) {
       setTransformButtonText("Regenerate");
     } else {
@@ -48,12 +49,17 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
       setUploadedFile(croppedImageBlob);
       if (!firstImageUploaded) {
         setFirstImageUploaded(true);
-        setIsRegenerate(true); // Set isRegenerate to true after the first image is uploaded
-        updateTransformButton(); // Update the transform button text and class
       }
     };
   };
-  
+
+  useEffect(() => {
+    updateTransformButton();
+  }, [isRegenerate]);
+
+  // useEffect(() => {
+  //   console.log("transformButtonText: ", transformButtonText);
+  // }, [transformButtonText]);
 
   let firstInterval = true;
   const getRandomInterval = () => {
@@ -105,11 +111,17 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
     try {
       const croppedImageBlob = await cropImage(originalImageDataUrl);
       await uploadImage(croppedImageBlob);
-      onResponse(); // Call the onResponse callback after the image has been uploaded
-      setIsRegenerate(true);
-      updateTransformButton();
+      // onResponse(imageSrc); // Call the onResponse callback after the image has been uploaded
+        console.log("isRegenerate: ", isRegenerate);
+        console.log("transformButtonText: ", transformButtonText);
+      
       if (!firstTransformRequest) {
         setFirstTransformRequest(true);
+        console.log("First transform request");
+        setIsRegenerate(true);
+        console.log("isRegenerate: ", isRegenerate);
+        updateTransformButton();
+        
       }
       setShowProgress(false); // Hide the buttons container
     } catch (error) {
@@ -161,6 +173,7 @@ const ImageLoader = ({ defaultImageUrl, apiEndpoint, onResponse, loaderDescripti
 
       if (response && response.data && response.data.imageUrl) {
         setImageSrc(response.data.imageUrl);
+        onResponse(response.data.imageUrl, isRegenerate)
         setShowProgress(false)
         setFadeStatus(true)
         setUploadProgress(1)

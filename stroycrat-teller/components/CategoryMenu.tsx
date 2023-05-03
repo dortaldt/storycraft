@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 const CategoryMenu = (props: { onCategorySelect: (arg0: any) => void; categories: any[]; }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
   const handleCategoryClick = (category: React.SetStateAction<null>) => {
     setSelectedCategory(category);
     props.onCategorySelect(category);

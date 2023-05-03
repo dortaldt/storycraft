@@ -1,8 +1,8 @@
 // @ts-nocheck
 // Import required modules and components
 import React, { useState, useEffect } from 'react';
-import ParagraphBanner from './ParagraphBanner';
-import CategoryMenu from './CategoryMenu';
+import ParagraphBanner from '../components/ParagraphBanner';
+import CategoryMenu from '../components/CategoryMenu';
 
 function App() {
   // Default image URL
